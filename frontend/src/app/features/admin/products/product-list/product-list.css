@@ -1,0 +1,16 @@
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.page-title { font-size: 20px; font-weight: 700; color: #111827; }
+.btn-add { padding: 9px 18px; background: #2563eb; color: #fff; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; }
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e5e7eb; background: #fff; }
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th { padding: 12px 14px; background: #f9fafb; font-weight: 600; color: #374151; text-align: right; border-bottom: 1px solid #e5e7eb; white-space: nowrap; }
+.table td { padding: 12px 14px; color: #4b5563; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #f9fafb; }
+.table small { color: #9ca3af; }
+.low { color: #ef4444; font-weight: 600; }
+.status { font-size: 12px; font-weight: 600; color: #9ca3af; }
+.status.active { color: #059669; }
+.actions { display: flex; gap: 6px; }
+.btn-edit { padding: 5px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 12px; text-decoration: none; color: #374151; }
+.btn-del { padding: 5px 12px; background: #fee2e2; color: #991b1b; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; }

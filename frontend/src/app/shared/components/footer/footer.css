@@ -1,0 +1,285 @@
+.footer {
+  width: 100%;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  color: #94a3b8;
+  margin-top: 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ================= CONTAINER ================= */
+
+.footer-inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 32px 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ================= BRAND ================= */
+
+.brand-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+}
+
+.footer-logo span {
+  font-size: 22px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================= DESCRIPTION ================= */
+
+.brand-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+/* ================= SOCIAL MEDIA ================= */
+
+.socials {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* SOCIAL BUTTON */
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+/* ICON */
+.social-btn svg {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+/* HOVER BACKGROUND ANIMATION */
+.social-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+/* HOVER EFFECT */
+.social-btn:hover::before {
+  opacity: 1;
+}
+
+.social-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+/* FACEBOOK HOVER COLOR */
+.social-btn[title="Facebook"]:hover::before {
+  background: linear-gradient(135deg, #1877f2, #0a58ca);
+}
+
+/* INSTAGRAM HOVER */
+.social-btn[title="Instagram"]:hover::before {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+}
+
+/* TWITTER / X HOVER */
+.social-btn[title="X (Twitter)"]:hover::before {
+  background: linear-gradient(135deg, #000000, #434343);
+}
+
+/* LINKEDIN HOVER */
+.social-btn[title="LinkedIn"]:hover::before {
+  background: linear-gradient(135deg, #0077b5, #004182);
+}
+
+/* ================= LINKS ================= */
+
+.footer-col h5 {
+  font-size: 12px;
+  font-weight: 800;
+  color: #e2e8f0;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col h5::before {
+  content: '';
+  width: 3px;
+  height: 16px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border-radius: 2px;
+}
+
+.footer-col a:not(.social-btn) {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #64748b;
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+  padding-left: 0;
+}
+
+/* The arrow indicator applies only to text links, NOT to the social
+   icon buttons (which are also <a> elements inside .brand-col). We scope
+   every rule below with :not(.social-btn) so the icons stay clean. */
+.footer-col a:not(.social-btn)::before {
+  content: '→';
+  margin-right: 6px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.footer-col a:not(.social-btn):hover {
+  color: #fff;
+  padding-left: 6px;
+}
+
+.footer-col a:not(.social-btn):hover::before {
+  opacity: 1;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #64748b;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.contact-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e2e8f0;
+}
+
+.contact-item svg {
+  width: 16px;
+  height: 16px;
+  color: #3b82f6;
+}
+
+/* ================= FOOTER BOTTOM ================= */
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  font-size: 13px;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-bottom p:hover {
+  color: #e2e8f0;
+}
+
+.footer-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a5b4fc;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  transition: 0.2s ease;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  background: rgba(124, 58, 237, 0.2);
+  color: #e0e7ff;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .social-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-desc {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,18 @@
+@if (totalPages > 1) {
+  <nav class="pagination" aria-label="Pagination">
+    <button class="pg-btn" (click)="go(1)" [disabled]="currentPage === 1" title="First">«</button>
+    <button class="pg-btn" (click)="go(currentPage - 1)" [disabled]="currentPage === 1" title="Previous">‹</button>
+
+    @for (page of pages; track $index) {
+      @if (page === -1) {
+        <span class="pg-ellipsis">…</span>
+      } @else {
+        <button class="pg-btn" [class.active]="page === currentPage" (click)="go(page)">{{ page }}</button>
+      }
+    }
+
+    <button class="pg-btn" (click)="go(currentPage + 1)" [disabled]="currentPage === totalPages" title="Next">›</button>
+    <button class="pg-btn" (click)="go(totalPages)" [disabled]="currentPage === totalPages" title="Last">»</button>
+  </nav>
+  <p class="pg-info">Page {{ currentPage }} of {{ totalPages }} — {{ totalItems }} results</p>
+}

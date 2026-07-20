@@ -1,0 +1,10 @@
+.title{font-size:22px;font-weight:700;color:#111827;margin-bottom:24px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.stat-card{background:#fff;border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px;border:1px solid #e5e7eb}
+.stat-card.blue{border-right:4px solid #2563eb}
+.stat-card.green{border-right:4px solid #059669}
+.stat-card.purple{border-right:4px solid #7c3aed}
+.stat-card.orange{border-right:4px solid #f59e0b}
+.icon{font-size:28px}
+.val{font-size:22px;font-weight:700;color:#111827;margin:0 0 2px}
+.lbl{font-size:13px;color:#6b7280;margin:0}

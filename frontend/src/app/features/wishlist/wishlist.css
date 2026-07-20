@@ -1,0 +1,18 @@
+.page { padding-top: 80px; min-height: 100vh; }
+.container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
+.title { font-size: 22px; font-weight: 700; margin-bottom: 24px; color: #111827; }
+.empty { text-align: center; padding: 80px; color: #6b7280; }
+.empty p { font-size: 22px; margin-bottom: 20px; }
+.browse-btn { padding: 12px 28px; background: #2563eb; color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.wish-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+.wish-card img { width: 100%; height: 200px; object-fit: cover; }
+.info { padding: 14px; }
+.name { font-size: 14px; font-weight: 600; color: #111827; text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; display: block; margin-bottom: 6px; }
+.name:hover { color: #2563eb; }
+.price { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 12px; }
+.actions { display: flex; gap: 8px; }
+.btn-cart { flex: 1; padding: 9px; background: #2563eb; color: #fff; border: none; border-radius: 7px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.btn-cart:hover { background: #1d4ed8; }
+.btn-remove { width: 36px; height: 36px; background: #fee2e2; border: none; border-radius: 7px; cursor: pointer; font-size: 16px; }
+.btn-remove:hover { background: #fecaca; }

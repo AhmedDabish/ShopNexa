@@ -1,0 +1,64 @@
+<div class="page"><div class="container">
+  <a routerLink="/orders" class="back-link">← Back to Orders</a>
+
+  @if (loading) { <p class="state">Loading...</p> }
+  @else if (order) {
+    <div class="order-header">
+      <div>
+        <h1>Order #{{ order.orderNumber }}</h1>
+        <p class="date">{{ order.orderDate | dateFormat:'long' }}</p>
+      </div>
+      <span class="status-badge" [class]="order.status.toLowerCase()">{{ statusLabel(order.status) }}</span>
+    </div>
+
+    <div class="layout">
+      <div class="main-col">
+        <div class="card">
+          <h3>Items</h3>
+          @for (item of order.orderItems ?? []; track item.id) {
+            <div class="item">
+              <img [src]="item.product?.images?.[0]?.imageUrl ?? 'images/placeholder.png'" [alt]="item.product?.name" />
+              <div class="info">
+                <p class="name">{{ item.product?.name }}</p>
+                <p class="qty">{{ item.quantity }} × {{ item.unitPrice | currencyFormat }}</p>
+              </div>
+              <p class="total">{{ item.totalPrice | currencyFormat }}</p>
+            </div>
+          }
+        </div>
+
+        @if (order.status === 'Shipped' || order.status === 'Processing') {
+          <a [routerLink]="['/orders', order.id, 'track']" class="track-btn">📍 Track Order</a>
+        }
+      </div>
+
+      <div class="side-col">
+        <div class="card">
+          <h3>Order Summary</h3>
+          <div class="row"><span>Subtotal</span><strong>{{ order.subTotal | currencyFormat }}</strong></div>
+          <div class="row"><span>Shipping</span><strong>{{ order.shippingCost | currencyFormat }}</strong></div>
+          @if (order.discountAmount > 0) {
+            <div class="row disc"><span>Discount</span><strong>- {{ order.discountAmount | currencyFormat }}</strong></div>
+          }
+          <div class="divider"></div>
+          <div class="row big"><span>Total</span><strong>{{ order.totalAmount | currencyFormat }}</strong></div>
+        </div>
+
+        <div class="card">
+          <h3>Payment Info</h3>
+          <p>Method: <strong>{{ order.paymentMethod }}</strong></p>
+          <p>Status: <strong>{{ order.paymentStatus }}</strong></p>
+          @if (order.trackingNumber) { <p>Tracking #: <strong>{{ order.trackingNumber }}</strong></p> }
+        </div>
+
+        @if (order.status === 'Pending') {
+          <button class="cancel-btn" (click)="cancel()" [disabled]="cancelling">
+            {{ cancelling ? 'Cancelling...' : '🗑️️️ Cancel Order' }}
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="state">Order not found.</p>
+  }
+</div></div>

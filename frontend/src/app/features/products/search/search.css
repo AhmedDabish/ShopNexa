@@ -1,0 +1,7 @@
+.page{padding-top:80px;min-height:100vh}
+.container{max-width:1280px;margin:0 auto;padding:24px 20px}
+.title{font-size:22px;font-weight:700;margin-bottom:8px;color:#111827}
+.title span{color:#2563eb}
+.count{font-size:14px;color:#6b7280;margin-bottom:20px}
+.state{text-align:center;padding:60px;color:#6b7280;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}

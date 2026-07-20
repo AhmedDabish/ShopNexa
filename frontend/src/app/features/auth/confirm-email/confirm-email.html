@@ -1,0 +1,5 @@
+<div class="auth-page"><div class="auth-card">
+  @if (loading) { <div class="auth-header"><div class="logo">⏳</div><h1>Verifying…</h1></div> }
+  @else if (success) { <div class="auth-header"><div class="logo">✅</div><h1>Email activated!</h1><p>You can now log in</p></div><a routerLink="/auth/login" class="btn-submit" style="display:block;text-align:center;text-decoration:none">Login</a> }
+  @else { <div class="auth-header"><div class="logo">❌</div><h1>Activation failed</h1><p>{{ error }}</p></div><a routerLink="/auth/register" class="btn-submit" style="display:block;text-align:center;text-decoration:none">Back to registration</a> }
+</div></div>

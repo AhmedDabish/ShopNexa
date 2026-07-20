@@ -1,0 +1,240 @@
+<div class="checkout-page">
+  <div class="container">
+
+    <!-- ─── Mode selection: shown only to guests on first arrival ─────── -->
+    @if (mode === 'choose') {
+      <div class="choose-mode">
+        <div class="choose-icon">🛍️</div>
+        <h1>Ready to checkout?</h1>
+        <p class="lead">Sign in for a faster experience, or continue as a guest.</p>
+        <div class="choose-actions">
+          <button class="btn-primary" (click)="goLogin()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Sign in
+          </button>
+          <button class="btn-outline" (click)="continueAsGuest()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Continue as Guest
+          </button>
+        </div>
+        <p class="hint">📧 Order confirmation will be sent to your email</p>
+      </div>
+    }
+
+    <!-- ─── Logged-in user flow ────────────────────────────────────────── -->
+    @else if (mode === 'auth') {
+      <div class="page-header">
+        <h1>Checkout</h1>
+        <p class="page-sub">Complete your order in just a few steps</p>
+      </div>
+
+      <!-- Progress steps -->
+      <div class="steps-bar">
+        @for (s of steps; track s; let i = $index) {
+          <div class="step-item" [class.active]="step === i + 1" [class.done]="step > i + 1">
+            <div class="step-circle">
+              @if (step > i + 1) {
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              } @else {
+                {{ i + 1 }}
+              }
+            </div>
+            <span class="step-label">{{ s }}</span>
+            @if (i < steps.length - 1) { <div class="step-line"></div> }
+          </div>
+        }
+      </div>
+
+      <!-- Step content -->
+      <div class="step-content">
+        @if (step === 1) {
+          <app-shipping-address (addressSelected)="onAddressSelected($event)" />
+        }
+        @if (step === 2) {
+          <app-payment-method (paymentSelected)="onPaymentSelected($event)" />
+        }
+        @if (step === 3) {
+          <div class="review-grid">
+            <div class="review-main">
+              <div class="card">
+                <h3 class="card-title">Promo Code</h3>
+                <app-promo-code (discountApplied)="onPromoApplied($event)" />
+              </div>
+              <div class="card">
+                <app-order-summary [promoDiscount]="promoDiscount" />
+              </div>
+            </div>
+            <aside class="review-side">
+              <div class="card place-card">
+                <h3>Ready to place your order?</h3>
+                <p>By clicking the button below, you agree to our terms and conditions.</p>
+                <button class="btn-place" (click)="placeOrder()" [disabled]="placingOrder">
+                  @if (placingOrder) {
+                    <span class="spinner"></span> Placing order…
+                  } @else {
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    Place Order
+                  }
+                </button>
+                <button class="btn-back" (click)="step = 2">← Change Payment Method</button>
+              </div>
+            </aside>
+          </div>
+        }
+        @if (step === 4) {
+          <div class="confirmation">
+            <div class="success-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2>Order placed successfully!</h2>
+            <p class="order-num">Order Number: <strong>{{ orderNumber }}</strong></p>
+            <p class="hint">A confirmation email has been sent to your inbox.</p>
+            <div class="confirmation-actions">
+              <a routerLink="/orders" class="btn-primary">View My Orders</a>
+              <a routerLink="/products" class="btn-outline">Continue Shopping</a>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ─── Guest flow ─────────────────────────────────────────────────── -->
+    @else if (mode === 'guest') {
+      <div class="page-header">
+        <h1>Guest Checkout</h1>
+        <p class="page-sub">No account needed — we'll email you the confirmation</p>
+      </div>
+
+      @if (step !== 4) {
+        <div class="guest-grid">
+          <div class="guest-main">
+            <div class="card">
+              <h3 class="card-title">
+                <span class="title-icon">👤</span> Contact Information
+              </h3>
+              <div class="grid-2">
+                <div class="field full">
+                  <label>Email <span class="req">*</span></label>
+                  <input type="email" [(ngModel)]="guest.email" placeholder="your@email.com" required />
+                </div>
+                <div class="field">
+                  <label>Full name <span class="req">*</span></label>
+                  <input [(ngModel)]="guest.fullName" placeholder="John Doe" required />
+                </div>
+                <div class="field">
+                  <label>Phone number <span class="req">*</span></label>
+                  <input [(ngModel)]="guest.phoneNumber" placeholder="+20 100 000 0000" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="card-title">
+                <span class="title-icon">📍</span> Shipping Address
+              </h3>
+              <div class="grid-2">
+                <div class="field full">
+                  <label>Street <span class="req">*</span></label>
+                  <input [(ngModel)]="guest.street" placeholder="123 Main Street" required />
+                </div>
+                <div class="field">
+                  <label>City <span class="req">*</span></label>
+                  <input [(ngModel)]="guest.city" placeholder="Cairo" required />
+                </div>
+                <div class="field">
+                  <label>State / Province</label>
+                  <input [(ngModel)]="guest.state" placeholder="Optional" />
+                </div>
+                <div class="field">
+                  <label>Postal code</label>
+                  <input [(ngModel)]="guest.zipCode" placeholder="Optional" />
+                </div>
+                <div class="field">
+                  <label>Country <span class="req">*</span></label>
+                  <input [(ngModel)]="guest.country" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="card-title">
+                <span class="title-icon">💳</span> Payment Method
+              </h3>
+              <div class="payment-options">
+                <label class="payment-option" [class.selected]="guest.paymentMethod === 'COD'">
+                  <input type="radio" name="pm" value="COD" [(ngModel)]="guest.paymentMethod" />
+                  <span class="pm-icon">💵</span>
+                  <div class="pm-info">
+                    <p class="pm-name">Cash on Delivery</p>
+                    <p class="pm-desc">Pay when you receive your order</p>
+                  </div>
+                </label>
+                <label class="payment-option" [class.selected]="guest.paymentMethod === 'CreditCard'">
+                  <input type="radio" name="pm" value="CreditCard" [(ngModel)]="guest.paymentMethod" />
+                  <span class="pm-icon">💳</span>
+                  <div class="pm-info">
+                    <p class="pm-name">Credit Card</p>
+                    <p class="pm-desc">Visa, Mastercard, American Express</p>
+                  </div>
+                </label>
+                <label class="payment-option" [class.selected]="guest.paymentMethod === 'PayPal'">
+                  <input type="radio" name="pm" value="PayPal" [(ngModel)]="guest.paymentMethod" />
+                  <span class="pm-icon">🅿️</span>
+                  <div class="pm-info">
+                    <p class="pm-name">PayPal</p>
+                    <p class="pm-desc">Pay securely with your PayPal account</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="card-title">
+                <span class="title-icon">🏷️</span> Promo Code
+              </h3>
+              <app-promo-code (discountApplied)="onPromoApplied($event)" />
+            </div>
+
+            <div class="card">
+              <h3 class="card-title">
+                <span class="title-icon">📝</span> Order Notes
+              </h3>
+              <div class="field full">
+                <input [(ngModel)]="guest.notes" placeholder="Anything we should know? (optional)" />
+              </div>
+            </div>
+          </div>
+
+          <aside class="guest-side">
+            <div class="card sticky">
+              <app-order-summary [promoDiscount]="promoDiscount" />
+              <button class="btn-place" (click)="placeGuestOrder()" [disabled]="placingOrder">
+                @if (placingOrder) {
+                  <span class="spinner"></span> Placing order…
+                } @else {
+                  Place Order
+                }
+              </button>
+              <button class="btn-text" (click)="goLogin()">I have an account → Sign in</button>
+            </div>
+          </aside>
+        </div>
+      }
+      @else {
+        <div class="confirmation">
+          <div class="success-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>Order placed successfully!</h2>
+          <p class="order-num">Order Number: <strong>{{ orderNumber }}</strong></p>
+          <p class="hint">📧 We've sent the order details to <strong>{{ guest.email }}</strong></p>
+          <p class="hint">You can claim this order anytime via "Forgot Password" to access your account.</p>
+          <div class="confirmation-actions">
+            <a routerLink="/" class="btn-primary">Continue Shopping</a>
+          </div>
+        </div>
+      }
+    }
+
+  </div>
+</div>

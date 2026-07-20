@@ -1,0 +1,51 @@
+<div class="card">
+
+  @if (discountPercent > 0) {
+    <span class="badge badge-discount">−{{ discountPercent }}%</span>
+  }
+  @if (isOutOfStock) {
+    <span class="badge badge-out">Sold Out</span>
+  }
+
+  <button class="btn-wish" [class.active]="inWishlist" (click)="toggleWishlist($event)" [title]="inWishlist ? 'Remove from wishlist' : 'Add to wishlist'">
+    {{ inWishlist ? '♥' : '♡' }}
+  </button>
+
+  <a [routerLink]="['/products', product.id]" class="img-wrap">
+    <img [src]="primaryImage" [alt]="product.name" loading="lazy" />
+  </a>
+
+  <div class="body">
+    <p class="category">{{ product.category?.name ?? 'Product' }}</p>
+
+    <a [routerLink]="['/products', product.id]" class="name">{{ product.name }}</a>
+
+    <div class="stars">
+      @for (s of stars; track s) {
+        <span [class.filled]="s <= product.averageRating">★</span>
+      }
+      <small>{{ product.averageRating | number:'1.1-1' }} ({{ product.viewCount }})</small>
+    </div>
+
+    <div class="price-row">
+      @if (product.discountPrice) {
+        <span class="price-new">{{ product.discountPrice | currencyFormat }}</span>
+        <span class="price-old">{{ product.price | currencyFormat }}</span>
+        <span class="save-tag">Save {{ discountPercent }}%</span>
+      } @else {
+        <span class="price-new">{{ product.price | currencyFormat }}</span>
+      }
+    </div>
+
+    <button class="btn-cart" [class.loading]="isAddingToCart" (click)="addToCart($event)" [disabled]="isAddingToCart || isOutOfStock">
+      @if (isAddingToCart) {
+        <span>Adding…</span>
+      } @else if (isOutOfStock) {
+        <span>Out of Stock</span>
+      } @else {
+        <span>Add to Cart</span>
+      }
+    </button>
+  </div>
+
+</div>

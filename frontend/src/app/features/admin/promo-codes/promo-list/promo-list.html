@@ -1,0 +1,54 @@
+<div>
+  <div class="header"><h2 class="page-title">Discount coupons</h2><button class="btn-add" (click)="openAdd()">+ Add coupon</button></div>
+
+  @if (showForm) {
+    <div class="form-card">
+      <h3>{{ editItem ? 'Edit coupon' : 'New coupon' }}</h3>
+      <div class="grid-2">
+        <div class="field"><label>Code</label><input [(ngModel)]="f.code" placeholder="SUMMER20" /></div>
+        <div class="field"><label>Discount type</label>
+          <select [(ngModel)]="f.discountType">
+            <option value="Percentage">Percentage %</option>
+            <option value="FixedAmount">Fixed amount</option>
+          </select>
+        </div>
+        <div class="field"><label>Discount value</label><input type="number" [(ngModel)]="f.discountValue" /></div>
+        <div class="field"><label>Minimum order</label><input type="number" [(ngModel)]="f.minimumOrderAmount" /></div>
+        <div class="field"><label>Max usage count</label><input type="number" [(ngModel)]="f.maxUsageCount" placeholder="0 = unlimited" /></div>
+        <div class="field"><label>Start date</label><input type="date" [(ngModel)]="f.startDate" /></div>
+        <div class="field"><label>Expiry date</label><input type="date" [(ngModel)]="f.endDate" /></div>
+      </div>
+      <div class="field full"><label>Description</label><input [(ngModel)]="f.description" /></div>
+      <label class="checkbox-label"><input type="checkbox" [(ngModel)]="f.isActive" /> Active coupon</label>
+      <div class="form-actions">
+        <button class="btn-cancel" (click)="cancel()">Cancel</button>
+        <button class="btn-save" (click)="save()" [disabled]="saving">{{ saving?'Saving…':'Save' }}</button>
+      </div>
+    </div>
+  }
+
+  @if (loading) { <p>Loading…</p> }
+  @else if (!promos.length) {
+    <p class="empty">No coupons yet.</p>
+  }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Code</th><th>Discount</th><th>Usage</th><th>Expiry</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        @for (p of promos; track p.id) {
+          <tr>
+            <td><strong>{{ p.code }}</strong></td>
+            <td>{{ p.discountType === 'Percentage' ? p.discountValue + '%' : (p.discountValue | currencyFormat) }}</td>
+            <td>{{ p.usedCount }} / {{ p.maxUsageCount ?? '∞' }}</td>
+            <td>{{ p.endDate | dateFormat:'short' }}</td>
+            <td><span [class]="p.isActive ? 'ok' : 'off'">{{ p.isActive ? 'Active' : 'Disabled' }}</span></td>
+            <td><div class="actions">
+              <button class="btn-edit" (click)="openEdit(p)">Edit</button>
+              <button class="btn-del" (click)="delete(p.id)">Delete</button>
+            </div></td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div>

@@ -1,0 +1,133 @@
+<div class="page">
+  <div class="page-header">
+    <h1>📋 Footer Management</h1>
+    <p>Edit the content displayed in the site footer</p>
+  </div>
+
+  @if (loading) {
+    <div class="loading-skeleton">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+  } @else {
+    @for (s of sections; track s.key) {
+      <div class="section-card" [class.contact-section]="s.key === 'contact'">
+        <div class="section-head">
+          <div class="section-title">
+            <h3>{{ s.label }}</h3>
+            @if (s.key === 'contact') {
+              <span class="section-badge">⭐ Control your contact info</span>
+            }
+          </div>
+          <button class="btn-add" (click)="startNew(s.key)">✨ Add item</button>
+        </div>
+
+        <div class="items-list">
+          @for (item of itemsBySection(s.key); track item.id) {
+            <div class="item-row" [class.inactive]="!item.isActive">
+              <div class="item-badge">{{ item.sortOrder }}</div>
+              <div class="item-content">
+                <p class="item-label">{{ item.label }}</p>
+                @if (item.url) { 
+                  <p class="item-url">
+                    @if (item.url.startsWith('http')) {
+                      <a [href]="item.url" target="_blank" rel="noopener">{{ item.url }}</a>
+                    } @else {
+                      {{ item.url }}
+                    }
+                  </p> 
+                }
+                @if (item.icon) { 
+                  <p class="item-icon">Icon: <strong>{{ item.icon }}</strong></p> 
+                }
+              </div>
+              <div class="item-status">
+                @if (item.isActive) {
+                  <span class="status-badge active">✓ Active</span>
+                } @else {
+                  <span class="status-badge inactive">✗ Hidden</span>
+                }
+              </div>
+              <div class="item-actions">
+                <button class="btn-toggle" (click)="toggleActive(item)" [title]="item.isActive ? 'Hide this item' : 'Show this item'">
+                  {{ item.isActive ? '👁 Hide' : '🔓 Show' }}
+                </button>
+                <button class="btn-edit" (click)="startEdit(item)">✏️ Edit</button>
+                <button class="btn-del" (click)="delete(item)">🗑️️️ Delete</button>
+              </div>
+            </div>
+          } @empty {
+            <div class="empty-state">
+              <p>No items yet</p>
+              <small>Add your first item to this section</small>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Edit/Create modal -->
+  @if (draft.section) {
+    <div class="modal-overlay" (click)="$event.target === $event.currentTarget && cancel()">
+      <div class="modal-dialog" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>{{ editing ? '✏️ Edit item' : '➕ New item' }}</h2>
+          <button class="btn-close" (click)="cancel()">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="field">
+            <label>📂 Section</label>
+            <select [(ngModel)]="draft.section" class="select-input">
+              @for (s of sections; track s.key) {
+                <option [value]="s.key">{{ s.label }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="field">
+            <label>📝 Label <span class="required">*</span></label>
+            <input [(ngModel)]="draft.label" placeholder="e.g. All Products or +1 800 123 4567" class="text-input" />
+          </div>
+
+          <div class="field">
+            <label>🔗 URL (optional)</label>
+            <input [(ngModel)]="draft.url" placeholder="/products or https://..." class="text-input" />
+          </div>
+
+          <div class="field">
+            <label>🎨 Icon (optional)</label>
+            <select [(ngModel)]="draft.icon" class="select-input">
+              <option value="">— None —</option>
+              <option value="phone">📱 phone</option>
+              <option value="email">📧 email</option>
+              <option value="clock">🕐 clock</option>
+              <option value="location">📍 location</option>
+              <option value="facebook">f Facebook</option>
+              <option value="instagram">📷 instagram</option>
+              <option value="twitter">𝕏 twitter</option>
+              <option value="linkedin">in linkedin</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>🔢 Sort Order</label>
+            <input type="number" [(ngModel)]="draft.sortOrder" class="number-input" />
+          </div>
+
+          <div class="field checkbox">
+            <input type="checkbox" [(ngModel)]="draft.isActive" id="isActive" />
+            <label for="isActive">✓ Display on site</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="cancel()">Cancel</button>
+          <button class="btn-save" (click)="save()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

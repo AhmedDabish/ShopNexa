@@ -1,0 +1,21 @@
+.step-wrap{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px}
+.step-wrap h3{font-size:17px;font-weight:700;margin-bottom:20px;color:#111827}
+.addr-card{display:flex;align-items:center;gap:14px;padding:14px;border:2px solid #e5e7eb;border-radius:10px;margin-bottom:10px;cursor:pointer;transition:border-color .15s}
+.addr-card.active{border-color:#2563eb;background:#eff6ff}
+.radio-mark{font-size:18px;color:#2563eb;flex-shrink:0}
+.addr-line{font-size:14px;font-weight:600;color:#111827;margin:0}
+.addr-sub{font-size:13px;color:#6b7280;margin:0}
+.default-badge{margin-right:auto;font-size:11px;background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:10px}
+.btn-add{width:100%;padding:11px;border:2px dashed #d1d5db;background:none;border-radius:10px;color:#2563eb;font-size:14px;cursor:pointer;margin-bottom:16px;font-family:inherit}
+.addr-form{margin-bottom:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:12px;font-weight:500;color:#374151}
+.field input{padding:9px 12px;border:1px solid #d1d5db;border-radius:7px;font-size:13px;outline:none;font-family:inherit}
+.field input:focus{border-color:#2563eb}
+.form-actions{display:flex;gap:8px}
+.btn-cancel{padding:9px 18px;border:1px solid #d1d5db;background:#fff;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px}
+.btn-save{padding:9px 18px;background:#2563eb;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600}
+.btn-save:disabled{background:#93c5fd;cursor:not-allowed}
+.btn-next{width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px}
+.btn-next:disabled{background:#9ca3af;cursor:not-allowed}

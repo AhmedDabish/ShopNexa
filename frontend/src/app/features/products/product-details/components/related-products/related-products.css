@@ -1,0 +1,3 @@
+.related { margin-top: 40px; }
+.related h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: #111827; }
+.scroll { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }

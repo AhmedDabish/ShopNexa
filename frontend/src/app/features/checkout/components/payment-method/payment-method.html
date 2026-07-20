@@ -1,0 +1,37 @@
+<div class="step-wrap">
+  <h3>Payment Method</h3>
+  <div class="methods">
+    @for (m of methods; track m.value) {
+      <label class="method-card" [class.active]="selected === m.value">
+        <input type="radio" name="payment" [value]="m.value" [(ngModel)]="selected" style="display:none" />
+        <span class="method-icon">{{ m.icon }}</span>
+        <div class="method-info">
+          <strong>{{ m.label }}</strong>
+          <small>{{ m.desc }}</small>
+        </div>
+        <span class="check">{{ selected === m.value ? '✅' : '' }}</span>
+      </label>
+    }
+  </div>
+
+  @if (selected === 'CreditCard') {
+    <div class="card-form">
+      <h4>Card Details</h4>
+      <div class="field">
+        <label>Cardholder Name</label>
+        <input type="text" [(ngModel)]="cardName" placeholder="John Smith" />
+      </div>
+      <div class="field">
+        <label>Card Number</label>
+        <input type="text" [(ngModel)]="cardNumber" (input)="formatCard()" placeholder="0000 0000 0000 0000" maxlength="19" />
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Expiry Date</label><input type="text" [(ngModel)]="cardExpiry" (input)="formatExpiry()" placeholder="MM/YY" maxlength="5" /></div>
+        <div class="field"><label>CVV</label><input type="text" [(ngModel)]="cardCvv" placeholder="123" maxlength="4" /></div>
+      </div>
+      <p class="secure-note">🔒 Your payment information is encrypted and secure</p>
+    </div>
+  }
+
+  <button class="btn-next" (click)="proceed()">Continue ›</button>
+</div>

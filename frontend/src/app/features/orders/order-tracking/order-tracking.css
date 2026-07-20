@@ -1,0 +1,24 @@
+.page { padding-top: 80px; min-height: 100vh; }
+.container { max-width: 600px; margin: 0 auto; padding: 24px 20px; }
+.back-link { font-size: 14px; color: #2563eb; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+.title { font-size: 22px; font-weight: 700; margin-bottom: 24px; color: #111827; }
+.state { text-align: center; padding: 80px; color: #6b7280; }
+.track-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 28px; }
+.track-header { margin-bottom: 28px; }
+.track-header p { font-size: 14px; color: #6b7280; margin-bottom: 4px; }
+.track-header strong { color: #111827; }
+.stepper { display: flex; flex-direction: column; gap: 0; }
+.step-item { display: flex; gap: 16px; }
+.step-line { display: flex; flex-direction: column; align-items: center; width: 36px; flex-shrink: 0; }
+.dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #e5e7eb; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #9ca3af; flex-shrink: 0; }
+.step-item.done .dot { background: #059669; border-color: #059669; color: #fff; }
+.step-item.current .dot { background: #2563eb; border-color: #2563eb; color: #fff; animation: pulse 1.5s ease-in-out infinite; }
+.line { width: 2px; flex: 1; min-height: 30px; background: #e5e7eb; margin: 4px 0; }
+.step-item.done + .step-item .step-line .line,
+.step-item.done .line { background: #059669; }
+.step-body { padding: 4px 0 24px; }
+.step-label { font-size: 15px; font-weight: 600; color: #374151; margin: 0 0 4px; }
+.step-item.current .step-label { color: #2563eb; }
+.step-date { font-size: 13px; color: #9ca3af; margin: 0; }
+.step-date.eta { color: #2563eb; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }

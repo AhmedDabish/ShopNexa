@@ -1,0 +1,68 @@
+<div class="filters">
+  <div class="filters-header">
+    <h3 class="filters-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
+      </svg>
+      Filters
+    </h3>
+    <button class="reset-btn" (click)="reset()">Reset</button>
+  </div>
+
+  <!-- Category -->
+  <div class="filter-group">
+    <p class="group-title">Category</p>
+    <div class="cat-list">
+      <input class="cat-opt" type="radio" id="cat-all" name="cat" [value]="null" [(ngModel)]="selectedCategory" />
+      <label class="cat-lbl" for="cat-all">
+        All Categories
+        <span class="cat-check"></span>
+      </label>
+      @for (cat of categories; track cat.id) {
+        <input class="cat-opt" type="radio" [id]="'cat-' + cat.id" name="cat" [value]="cat.id" [(ngModel)]="selectedCategory" />
+        <label class="cat-lbl" [for]="'cat-' + cat.id">
+          {{ cat.name }}
+          <span class="cat-check"></span>
+        </label>
+      }
+    </div>
+  </div>
+
+  <!-- Price -->
+  <div class="filter-group">
+    <p class="group-title">Price Range</p>
+    <div class="price-row">
+      <div class="price-field">
+        <label>Min</label>
+        <input type="number" [(ngModel)]="minPrice" placeholder="0" min="0" />
+      </div>
+      <span class="price-sep">—</span>
+      <div class="price-field">
+        <label>Max</label>
+        <input type="number" [(ngModel)]="maxPrice" placeholder="Any" min="0" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Rating -->
+  <div class="filter-group">
+    <p class="group-title">Min Rating</p>
+    <div class="rating-opts">
+      @for (r of [5,4,3,2]; track r) {
+        <input class="rating-opt-input" type="radio" [id]="'r' + r" name="rating" [value]="r" [(ngModel)]="selectedRating" />
+        <label class="rating-opt-lbl" [for]="'r' + r">
+          <span class="stars-display">
+            @for (s of [1,2,3,4,5]; track s) {
+              {{ s <= r ? '★' : '☆' }}
+            }
+          </span>
+          <span class="rating-label">{{ r }}+ Stars</span>
+        </label>
+      }
+    </div>
+  </div>
+
+  <div class="apply-wrap">
+    <button class="apply-btn" (click)="apply()">Apply Filters</button>
+  </div>
+</div>

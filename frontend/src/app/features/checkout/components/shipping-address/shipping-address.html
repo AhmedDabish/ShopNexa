@@ -1,0 +1,36 @@
+<div class="step-wrap">
+  <h3>Shipping Address</h3>
+  @for (a of addresses; track a.id) {
+    <label class="addr-card" [class.active]="selected===a.id">
+      <input type="radio" name="addr" [value]="a.id" [(ngModel)]="selected" style="display:none" />
+      <div class="radio-mark">{{ selected===a.id ? '●' : '○' }}</div>
+      <div>
+        <p class="addr-line">{{ a.street }}, {{ a.city }}, {{ a.state }}</p>
+        <p class="addr-sub">{{ a.country }} {{ a.zipCode }}</p>
+      </div>
+      @if (a.isDefault) { <span class="default-badge">Default</span> }
+    </label>
+  }
+
+  @if (showForm) {
+    <form [formGroup]="form" class="addr-form">
+      <div class="grid-2">
+        <div class="field"><label>Street Address</label><input formControlName="street" placeholder="123 Main St" /></div>
+        <div class="field"><label>City</label><input formControlName="city" placeholder="New York" /></div>
+        <div class="field"><label>State / Province</label><input formControlName="state" placeholder="NY" /></div>
+        <div class="field"><label>ZIP / Postal Code</label><input formControlName="zipCode" placeholder="10001" /></div>
+        <div class="field"><label>Country</label><input formControlName="country" placeholder="United States" /></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="showForm=false">Cancel</button>
+        <button type="button" class="btn-save" (click)="saveAndSelect()" [disabled]="loading">
+          {{ loading ? 'Saving...' : 'Save & Select' }}
+        </button>
+      </div>
+    </form>
+  } @else {
+    <button class="btn-add" (click)="showForm=true">+ Add New Address</button>
+  }
+
+  <button class="btn-next" (click)="proceed()" [disabled]="!selected">Continue ›</button>
+</div>

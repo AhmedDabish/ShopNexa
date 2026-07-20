@@ -1,0 +1,12 @@
+<div>
+  <h1 class="title">Store statistics</h1>
+  @if (loading) { <p>Loading…</p> }
+  @else {
+    <div class="cards">
+      <div class="stat-card green"><div class="icon">💰</div><div><p class="val">{{ earnings?.totalEarnings | currencyFormat }}</p><p class="lbl">Total earnings</p></div></div>
+      <div class="stat-card orange"><div class="icon">⏳</div><div><p class="val">{{ earnings?.pendingPayouts | currencyFormat }}</p><p class="lbl">Pending payments</p></div></div>
+      <div class="stat-card blue"><div class="icon">🏷️</div><div><p class="val">{{ productsCount }}</p><p class="lbl">My products</p></div></div>
+      <div class="stat-card purple"><div class="icon">📦</div><div><p class="val">{{ ordersCount }}</p><p class="lbl">My orders</p></div></div>
+    </div>
+  }
+</div>

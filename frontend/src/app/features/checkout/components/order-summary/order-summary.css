@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════
+   ORDER SUMMARY — Compact, professional design
+═══════════════════════════════════════════ */
+
+.summary-wrap {
+  background: var(--bg-surface, #fff);
+  border-radius: 14px;
+  padding: 0;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────── */
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  margin-bottom: 16px;
+}
+.summary-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin: 0;
+}
+.items-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  background: var(--bg-surface-2, #f1f5f9);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+/* ─── Items list (scrollable if too many) ─────────────────────────────── */
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  /* Cap height when there are many products — scrolls instead of stretching
+     the page. The cart in the screenshot had 6 items which made the whole
+     panel huge. */
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Custom scrollbar for the items list */
+.items::-webkit-scrollbar { width: 6px; }
+.items::-webkit-scrollbar-track { background: transparent; }
+.items::-webkit-scrollbar-thumb {
+  background: var(--border-color, #e5e7eb);
+  border-radius: 3px;
+}
+.items::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted, #94a3b8);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background 150ms ease;
+}
+.item:hover {
+  background: var(--bg-surface-2, #f8fafc);
+}
+
+/* ─── Item image with quantity badge ──────────────────────────────────── */
+.item-img-wrap {
+  position: relative;
+  flex-shrink: 0;
+  /* THIS is what fixes the giant images. The old CSS let the image fill its
+     container; now we lock it to 48×48 regardless of intrinsic size. */
+  width: 48px;
+  height: 48px;
+}
+.item-img-wrap img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  background: var(--bg-surface-2, #f8fafc);
+  display: block;
+}
+.item-qty-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2563eb;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0 6px;
+  border: 2px solid var(--bg-surface, #fff);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+/* ─── Item info ───────────────────────────────────────────────────────── */
+.item-info {
+  flex: 1;
+  min-width: 0; /* lets text-overflow work inside flex */
+}
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  margin: 0 0 4px;
+  line-height: 1.35;
+  /* Truncate long product names to two lines so the layout stays tidy.
+     Both -webkit-line-clamp and line-clamp are listed so older browsers
+     and modern ones are both happy. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.unit {
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+  margin: 0;
+}
+.price {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* ─── Price breakdown ─────────────────────────────────────────────────── */
+.breakdown {
+  background: var(--bg-surface-2, #f8fafc);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 4px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary, #64748b);
+  padding: 5px 0;
+}
+.row span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.row strong {
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+}
+.row strong.free {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.row.discount {
+  color: #10b981;
+}
+.row.discount strong {
+  color: #10b981;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color, #e5e7eb);
+  margin: 8px 0;
+}
+
+.row.total {
+  padding: 6px 0 2px;
+}
+.row.total span {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+}
+.row.total strong {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+/* ─── Edit cart link ──────────────────────────────────────────────────── */
+.edit-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 150ms ease;
+}
+.edit-link:hover {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.05);
+}

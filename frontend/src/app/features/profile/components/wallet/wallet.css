@@ -1,0 +1,12 @@
+.section-title { font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 24px; }
+.balance-card { background: linear-gradient(135deg, #2563eb, #7c3aed); border-radius: 14px; padding: 28px; margin-bottom: 28px; color: #fff; }
+.balance-label { font-size: 14px; opacity: 0.8; margin-bottom: 8px; }
+.balance-amount { font-size: 36px; font-weight: 700; }
+.tx-title { font-size: 15px; font-weight: 600; color: #374151; margin-bottom: 14px; }
+.empty { color: #9ca3af; padding: 20px 0; }
+.tx-list { display: flex; flex-direction: column; gap: 10px; }
+.tx-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f3f4f6; }
+.tx-desc { font-size: 14px; color: #111827; margin: 0 0 3px; }
+.tx-date { font-size: 12px; color: #9ca3af; margin: 0; }
+.tx-amount { font-size: 15px; font-weight: 700; color: #ef4444; }
+.tx-amount.credit { color: #059669; }

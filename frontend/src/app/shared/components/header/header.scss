@@ -1,0 +1,59 @@
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: #fff; border-bottom: 1px solid #e9ecef;
+  z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  .container { padding: 0 16px; }
+
+  .header-inner {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 0; min-height: 64px;
+  }
+
+  .logo { font-size: 20px; font-weight: 700; color: #007bff; white-space: nowrap; }
+
+  .search-bar {
+    flex: 1; display: flex;
+    input { flex: 1; padding: 8px 12px; border: 1px solid #dee2e6; border-radius: 8px 0 0 8px; outline: none; font-size: 14px; }
+    button { padding: 8px 12px; background: #007bff; color: #fff; border: none; border-radius: 0 8px 8px 0; cursor: pointer; }
+  }
+
+  .actions { display: flex; align-items: center; gap: 12px; }
+
+  .icon-btn {
+    position: relative; font-size: 20px; cursor: pointer; color: #495057;
+    &:hover { color: #007bff; }
+    .badge {
+      position: absolute; top: -8px; right: -8px;
+      background: #dc3545; color: #fff;
+      font-size: 10px; min-width: 18px; height: 18px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+  }
+
+  .user-menu {
+    position: relative;
+    .user-name { cursor: pointer; font-size: 14px; font-weight: 500; }
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #dee2e6; border-radius: 8px;
+      min-width: 160px; padding: 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      a { display: block; padding: 8px 16px; font-size: 14px; color: #495057; &:hover { background: #f8f9fa; } }
+    }
+    &:hover .dropdown { display: block; }
+  }
+
+  .btn-login, .btn-register {
+    padding: 6px 16px; border-radius: 8px; font-size: 14px; cursor: pointer;
+  }
+  .btn-login { border: 1px solid #007bff; color: #007bff; }
+  .btn-register { background: #007bff; color: #fff; }
+
+  .nav {
+    display: flex; gap: 24px; padding-bottom: 8px;
+    a { font-size: 14px; color: #495057; padding: 4px 0; border-bottom: 2px solid transparent;
+      &.active { color: #007bff; border-color: #007bff; }
+      &:hover { color: #007bff; }
+    }
+  }
+}

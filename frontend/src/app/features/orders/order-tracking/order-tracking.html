@@ -1,0 +1,34 @@
+<div class="page"><div class="container">
+  <a routerLink="/orders" class="back-link">← Back to Orders</a>
+  <h1 class="title">Track Order</h1>
+
+  @if (loading) { <p class="state">Loading...</p> }
+  @else if (tracking) {
+    <div class="track-card">
+      <div class="track-header">
+        <p>Order Number: <strong>{{ tracking.orderNumber }}</strong></p>
+        @if (tracking.trackingNumber) {
+          <p>Tracking Number: <strong>{{ tracking.trackingNumber }}</strong></p>
+        }
+      </div>
+
+      <div class="stepper">
+        @for (step of tracking.steps; track step.status; let last = $last) {
+          <div class="step-item" [class.done]="step.completed" [class.current]="step.current">
+            <div class="step-line">
+              <div class="dot">{{ step.completed ? '✓' : '' }}</div>
+              @if (!last) { <div class="line"></div> }
+            </div>
+            <div class="step-body">
+              <p class="step-label">{{ step.label }}</p>
+              @if (step.date) { <p class="step-date">{{ step.date | dateFormat:'long' }}</p> }
+              @else if (step.current) { <p class="step-date eta">In Progress</p> }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="state">Tracking information not available.</p>
+  }
+</div></div>

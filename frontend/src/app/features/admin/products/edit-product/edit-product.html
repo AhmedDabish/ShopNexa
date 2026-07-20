@@ -1,0 +1,26 @@
+<div>
+  <div class="header"><h2 class="page-title">Edit product</h2><a [routerLink]="listUrl" class="btn-back">← Back</a></div>
+  @if (loading) { <p>Loading…</p> }
+  @else {
+    <form [formGroup]="form" (ngSubmit)="save()" class="form-card">
+      <div class="grid-2">
+        <div class="field"><label>Product name</label><input formControlName="name" /></div>
+        <div class="field"><label>Product code</label><input formControlName="sku" /></div>
+        <div class="field"><label>Price</label><input type="number" formControlName="price" /></div>
+        <div class="field"><label>Discount price</label><input type="number" formControlName="discountPrice" /></div>
+        <div class="field"><label>Stock</label><input type="number" formControlName="stockQuantity" /></div>
+        <div class="field"><label>Category</label>
+          <select formControlName="categoryId">
+            @for (c of categories; track c.id) { <option [value]="c.id">{{ c.name }}</option> }
+          </select>
+        </div>
+      </div>
+      <div class="field full"><label>Description</label><textarea formControlName="description" rows="4"></textarea></div>
+      <label class="checkbox-label"><input type="checkbox" formControlName="isActive" /> Product active</label>
+      <div class="form-actions">
+<a [routerLink]="listUrl" class="btn-cancel">Cancel</a>
+        <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving…' : 'Save changes' }}</button>
+      </div>
+    </form>
+  }
+</div>

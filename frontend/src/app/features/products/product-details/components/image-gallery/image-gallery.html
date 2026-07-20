@@ -1,0 +1,15 @@
+<div class="gallery">
+  <div class="main-img" (click)="zoomed = !zoomed" [class.zoomed]="zoomed">
+    <img [src]="main" alt="Product image" />
+    <span class="zoom-hint">{{ zoomed ? '−' : '+' }}</span>
+  </div>
+  @if (images.length > 1) {
+    <div class="thumbs">
+      @for (img of images; track img.id; let i = $index) {
+        <button class="thumb" [class.active]="i === activeIndex" (click)="activeIndex = i">
+          <img [src]="img.imageUrl" alt="" />
+        </button>
+      }
+    </div>
+  }
+</div>

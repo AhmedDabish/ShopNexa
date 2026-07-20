@@ -1,0 +1,26 @@
+<div>
+  <div class="header"><h2 class="page-title">Add new product</h2><a [routerLink]="listUrl" class="btn-back">← Back</a></div>
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-card">
+    <div class="grid-2">
+      <div class="field"><label>Product name</label><input formControlName="name" /></div>
+      <div class="field"><label>Product code (SKU)</label><input formControlName="sku" /></div>
+      <div class="field"><label>Price (EGP)</label><input type="number" formControlName="price" /></div>
+      <div class="field"><label>Discount price (optional)</label><input type="number" formControlName="discountPrice" /></div>
+      <div class="field"><label>Quantity in stock</label><input type="number" formControlName="stockQuantity" /></div>
+      <div class="field"><label>Category</label>
+        <select formControlName="categoryId">
+          <option [value]="null">Choose category</option>
+          @for (c of categories; track c.id) { <option [value]="c.id">{{ c.name }}</option> }
+        </select>
+      </div>
+    </div>
+    <div class="field full"><label>Description</label><textarea formControlName="description" rows="4"></textarea></div>
+    <div class="field full"><label>Product images</label><input type="file" accept="image/*" multiple (change)="onFilesChange($event)" /></div>
+    <label class="checkbox-label"><input type="checkbox" formControlName="isActive" /> Publish product</label>
+    <div class="form-actions">
+      <!-- <a routerLink="/admin/products" class="btn-cancel">Cancel</a> -->
+<a [routerLink]="listUrl" class="btn-cancel">Cancel</a>
+      <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving…' : 'Add product' }}</button>
+    </div>
+  </form>
+</div>

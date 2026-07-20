@@ -1,0 +1,71 @@
+<div class="page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="page-header-inner">
+        <div>
+          <h1 class="page-title">All Products</h1>
+          @if (!loading) {
+            <p class="page-count">{{ totalItems }} results found</p>
+          }
+        </div>
+        <div class="toolbar">
+          <button class="filter-toggle-btn" (click)="showFilters = !showFilters">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/>
+              <line x1="11" y1="18" x2="13" y2="18"/>
+            </svg>
+            Filters
+          </button>
+          <app-sort [value]="filter.sort || ''" (sortChange)="onSortChange($event)" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-wrap">
+    <div class="container">
+      <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" [class.open]="showFilters">
+          <app-filters [categories]="categories" [currentFilter]="filter" (filterChange)="onFilterChange($event)" />
+        </aside>
+
+        <!-- Products -->
+        <main>
+          @if (loading) {
+            <div class="skel-grid">
+              @for (_ of [1,2,3,4,5,6,7,8,9]; track $index) {
+                <div class="skel-card shimmer"></div>
+              }
+            </div>
+          } @else if (products.length === 0) {
+            <div class="empty-state">
+              <div class="empty-icon">🔍</div>
+              <h3>No products found</h3>
+              <p>Try adjusting your filters or search with different terms.</p>
+              <a routerLink="/products" class="empty-cta">Clear Filters</a>
+            </div>
+          } @else {
+            <div class="grid">
+              @for (p of products; track p.id) {
+                <app-product-card [product]="p" />
+              }
+            </div>
+            <app-pagination
+              [currentPage]="currentPage"
+              [totalPages]="totalPages"
+              [totalItems]="totalItems"
+              (pageChange)="onPageChange($event)"
+            />
+          }
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+</div>

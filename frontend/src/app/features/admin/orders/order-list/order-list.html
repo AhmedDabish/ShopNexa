@@ -1,0 +1,50 @@
+<!-- <div>
+  <h2 class="page-title">All Orders</h2>
+  @if (loading) { <p>Loading...</p> }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Update Status</th></tr></thead>
+      <tbody>
+        @for (o of orders; track o.id) {
+          <tr>
+            <td><a [routerLink]="['/admin/orders', o.id]" class="order-link">#{{ o.orderNumber }}</a></td>
+            <td>{{ o.userId }}</td>
+            <td>{{ o.orderDate | dateFormat:'short' }}</td>
+            <td><strong>{{ o.totalAmount | currencyFormat }}</strong></td>
+            <td><span class="status-badge" [class]="o.status.toLowerCase()">{{ statusLabels[o.status] }}</span></td>
+            <td>
+              <select class="status-select" [value]="o.status" (change)="updateStatus(o, $any($event.target).value)">
+                @for (s of statuses; track s) { <option [value]="s">{{ statusLabels[s] }}</option> }
+              </select>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div> -->
+<div>
+  <h2 class="page-title">All Orders</h2>
+  @if (loading) { <p>Loading...</p> }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Update Status</th></tr></thead>
+      <tbody>
+        @for (o of orders; track o.id) {
+          <tr>
+            <td><a [routerLink]="['/admin/orders', o.id]" class="order-link">#{{ o.orderNumber }}</a></td>
+            <td>{{ $any(o).customerName || ('#' + o.userId) }}</td>
+            <td>{{ o.orderDate | dateFormat:'short' }}</td>
+            <td><strong>{{ o.totalAmount | currencyFormat }}</strong></td>
+            <td><span class="status-badge" [class]="o.status.toLowerCase()">{{ statusLabels[o.status] }}</span></td>
+            <td>
+              <select class="status-select" [value]="o.status" (change)="updateStatus(o, $any($event.target).value)">
+                @for (s of statuses; track s) { <option [value]="s">{{ statusLabels[s] }}</option> }
+              </select>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div>

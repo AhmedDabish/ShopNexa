@@ -1,0 +1,44 @@
+<!-- <div>
+  <div class="header"><h2 class="page-title">My products</h2><a routerLink="/admin/products/add" class="btn-add">+ Add product</a></div>
+  @if (loading) { <p>Loading…</p> }
+  @else if (products.length === 0) { <p class="empty">No products yet</p> }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Name</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        @for (p of products; track p.id) {
+          <tr>
+            <td><strong>{{ p.name }}</strong></td>
+            <td>{{ p.price | currencyFormat }}</td>
+            <td>{{ p.stockQuantity }}</td>
+            <td><span [class]="p.isActive ? 'ok' : 'off'">{{ p.isActive ? 'Active' : 'Disabled' }}</span></td>
+            <td><a [routerLink]="['/admin/products/edit', p.id]" class="btn-edit">Edit</a></td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div> -->
+
+
+<div>
+  <div class="header"><h2 class="page-title">My products</h2><a routerLink="/seller/products/add" class="btn-add">+ Add product</a></div>
+  @if (loading) { <p>Loading…</p> }
+  @else if (products.length === 0) { <p class="empty">No products yet</p> }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Name</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        @for (p of products; track p.id) {
+          <tr>
+            <td><strong>{{ p.name }}</strong></td>
+            <td>{{ p.price | currencyFormat }}</td>
+            <td>{{ p.stockQuantity }}</td>
+            <td><span [class]="p.isActive ? 'ok' : 'off'">{{ p.isActive ? 'Active' : 'Disabled' }}</span></td>
+            <td><a [routerLink]="['/seller/products/edit', p.id]" class="btn-edit">Edit</a></td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div>

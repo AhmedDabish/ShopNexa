@@ -1,0 +1,145 @@
+<div class="dashboard">
+  <header class="page-header">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Welcome back! Here's what's happening with your store today.</p>
+    </div>
+  </header>
+
+  @if (loading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading dashboard...</p>
+    </div>
+  } @else if (stats) {
+
+    <!-- Stat cards -->
+    <div class="stats-grid">
+      <div class="stat-card revenue">
+        <div class="stat-icon">💰</div>
+        <div class="stat-content">
+          <span class="stat-label">Total Revenue</span>
+          <span class="stat-value">{{ stats.totalRevenue | currencyFormat }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card orders">
+        <div class="stat-icon">📦</div>
+        <div class="stat-content">
+          <span class="stat-label">Total Orders</span>
+          <span class="stat-value">{{ stats.totalOrders }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card users">
+        <div class="stat-icon">👥</div>
+        <div class="stat-content">
+          <span class="stat-label">Total Users</span>
+          <span class="stat-value">{{ stats.totalUsers }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card products">
+        <div class="stat-icon">🛍️</div>
+        <div class="stat-content">
+          <span class="stat-label">Active Products</span>
+          <span class="stat-value">{{ stats.totalProducts }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card pending">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-content">
+          <span class="stat-label">Pending Orders</span>
+          <span class="stat-value">{{ stats.pendingOrders }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card avg">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <span class="stat-label">Avg Order Value</span>
+          <span class="stat-value">{{ averageOrderValue | currencyFormat }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts row -->
+    <div class="charts-grid">
+      <div class="chart-card large">
+        <div class="chart-header">
+          <h3>Revenue & Orders</h3>
+          <span class="chart-sub">Last 6 months</span>
+        </div>
+        <div class="chart-container">
+          <canvas baseChart
+            [type]="lineChartType"
+            [data]="lineChartData"
+            [options]="lineChartOptions">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Order Status</h3>
+          <span class="chart-sub">All time</span>
+        </div>
+        <div class="chart-container pie">
+          <canvas baseChart
+            [type]="pieChartType"
+            [data]="pieChartData"
+            [options]="pieChartOptions">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top products + recent orders -->
+    <div class="bottom-grid">
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Top Products</h3>
+          <a routerLink="/admin/products" class="see-all">View all →</a>
+        </div>
+        <div class="top-products">
+          @for (p of topProducts; track p.productId; let i = $index) {
+            <div class="product-row">
+              <span class="rank">#{{ i + 1 }}</span>
+              <div class="product-info">
+                <p class="product-name">{{ p.name }}</p>
+                <p class="product-stats">{{ p.unitsSold }} sold · {{ p.revenue | currencyFormat }}</p>
+              </div>
+            </div>
+          } @empty {
+            <p class="empty">No sales data yet.</p>
+          }
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Recent Orders</h3>
+          <a routerLink="/admin/orders" class="see-all">View all →</a>
+        </div>
+        <div class="recent-orders">
+          @for (o of stats.recentOrders; track o.id) {
+            <div class="order-row">
+              <div class="order-info">
+                <p class="order-num">#{{ o.orderNumber }}</p>
+                <p class="order-customer">{{ o.customerName }}</p>
+              </div>
+              <div class="order-meta">
+                <span class="order-amount">{{ o.totalAmount | currencyFormat }}</span>
+                <span class="badge-status" [class]="'badge-' + o.status.toLowerCase()">{{ o.status }}</span>
+              </div>
+            </div>
+          } @empty {
+            <p class="empty">No recent orders.</p>
+          }
+        </div>
+      </div>
+    </div>
+
+  }
+</div>

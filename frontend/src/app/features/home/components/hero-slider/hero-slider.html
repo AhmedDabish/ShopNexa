@@ -1,0 +1,72 @@
+<section class="slider">
+
+  @for (banner of activeBanners; track banner.id; let i = $index) {
+    <div class="slide" [class.active]="i === current"
+         [style.background-image]="banner.imageUrl ? 'url(' + banner.imageUrl + ')' : ''">
+      <div class="slide-bg-overlay"></div>
+
+      <div class="slide-content">
+        <div class="slide-eyebrow">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">New Collection 2025</span>
+        </div>
+
+        <h1 class="slide-title">
+          {{ banner.title }}<br>
+          <span class="title-highlight">{{ banner.description ? 'Premium Quality' : 'Shop Now' }}</span>
+        </h1>
+
+        <p class="slide-desc">
+          {{ banner.description || 'Discover thousands of products handpicked for quality, style, and value. Your perfect find is just a click away.' }}
+        </p>
+
+        <div class="slide-actions">
+          <a [routerLink]="banner.linkUrl ?? '/products'" class="btn-primary-hero">
+            Explore Collection
+            <span class="btn-arrow">→</span>
+          </a>
+          <a routerLink="/products" class="btn-ghost-hero">
+            View All Products
+          </a>
+        </div>
+      </div>
+
+      <div class="slide-stats">
+        <div class="stat-pill">
+          <span class="sp-num">50K+</span>
+          <span class="sp-label">Happy<br>Customers</span>
+        </div>
+        <div class="stat-pill">
+          <span class="sp-num">10K+</span>
+          <span class="sp-label">Products<br>Available</span>
+        </div>
+        <div class="stat-pill">
+          <span class="sp-num">4.9★</span>
+          <span class="sp-label">Average<br>Rating</span>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Side dots progress -->
+  <div class="progress-dots">
+    @for (banner of activeBanners; track banner.id; let i = $index) {
+      <button class="pdot" [class.active]="i === current" (click)="goTo(i)"></button>
+    }
+  </div>
+
+  <!-- Bottom controls -->
+  <div class="slider-controls">
+    <button class="ctrl-btn" (click)="prev()">‹</button>
+    <button class="ctrl-btn" (click)="next()">›</button>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue">
+    <div class="scroll-wheel">
+      <div class="scroll-wheel-dot"></div>
+    </div>
+    <span>Scroll</span>
+  </div>
+
+</section>

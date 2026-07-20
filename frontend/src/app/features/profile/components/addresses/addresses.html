@@ -1,0 +1,44 @@
+<div>
+  <div class="section-header">
+    <h2 class="section-title">My addresses</h2>
+    <button class="btn-add" (click)="openAdd()">+ Add address</button>
+  </div>
+
+  @if (loading) { <p>Loading…</p> }
+  @else {
+    @if (addresses.length === 0 && !showForm) { <p class="empty">No saved addresses</p> }
+    @for (a of addresses; track a.id) {
+      <div class="addr-card">
+        <div class="addr-info">
+          <p class="addr-main">{{ a.street }}, {{ a.city }}, {{ a.state }}</p>
+          <p class="addr-sub">{{ a.country }} - {{ a.zipCode }}</p>
+          @if (a.isDefault) { <span class="default-tag">Default</span> }
+        </div>
+        <div class="addr-actions">
+          <button class="btn-edit" (click)="openEdit(a)">Edit</button>
+          <button class="btn-del" (click)="delete(a.id)">Delete</button>
+        </div>
+      </div>
+    }
+
+    @if (showForm) {
+      <div class="form-wrap">
+        <h3>{{ editId ? 'Edit address' : 'New address' }}</h3>
+        <form [formGroup]="form" (ngSubmit)="save()">
+          <div class="grid-2">
+            <div class="field"><label>Street</label><input formControlName="street" /></div>
+            <div class="field"><label>City</label><input formControlName="city" /></div>
+            <div class="field"><label>Governorate</label><input formControlName="state" /></div>
+            <div class="field"><label>Postal code</label><input formControlName="zipCode" /></div>
+            <div class="field"><label>Country</label><input formControlName="country" /></div>
+          </div>
+          <label class="checkbox-label"><input type="checkbox" formControlName="isDefault" /> Make it the default address</label>
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" (click)="showForm = false">Cancel</button>
+            <button type="submit" class="btn-save" [disabled]="saving">{{ saving ? 'Saving…' : 'Save' }}</button>
+          </div>
+        </form>
+      </div>
+    }
+  }
+</div>

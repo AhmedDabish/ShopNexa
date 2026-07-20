@@ -1,0 +1,81 @@
+<div class="page">
+  <div class="container">
+    @if (loading) {
+      <div class="loading-state"><p>Loading...</p></div>
+    } @else if (product) {
+      <app-breadcrumb [crumbs]="[{label:'Home',url:'/home'},{label:'Products',url:'/products'},{label:product.name}]" />
+
+      <div class="product-layout">
+        <div class="gallery-col">
+          <app-image-gallery [images]="product.images ?? []" />
+        </div>
+
+        <div class="info-col">
+          <p class="category">{{ product.category?.name }}</p>
+          <h1 class="name">{{ product.name }}</h1>
+
+          <div class="rating-row">
+            @for (s of [1,2,3,4,5]; track s) {
+              <span [class.filled]="s <= product.averageRating">★</span>
+            }
+            <a class="review-count" (click)="activeTab='reviews'">({{ reviews.length }} reviews)</a>
+          </div>
+
+          <div class="price-row">
+            @if (product.discountPrice) {
+              <span class="price-new">{{ product.discountPrice | currencyFormat }}</span>
+              <span class="price-old">{{ product.price | currencyFormat }}</span>
+              <span class="discount-badge">Save {{ discountPercent }}%</span>
+            } @else {
+              <span class="price-new">{{ product.price | currencyFormat }}</span>
+            }
+          </div>
+
+          <div class="stock" [class.out]="product.stockQuantity === 0">
+            {{ product.stockQuantity > 0 ? '✅ In Stock (' + product.stockQuantity + ' available)' : '❌ Out of Stock' }}
+          </div>
+
+          @if (product.stockQuantity > 0) {
+            <div class="qty-row">
+              <label>Quantity:</label>
+              <div class="qty-ctrl">
+                <button (click)="decreaseQty()">−</button>
+                <span>{{ quantity }}</span>
+                <button (click)="increaseQty()">+</button>
+              </div>
+            </div>
+
+            <div class="action-row">
+              <button class="btn-cart" (click)="addToCart()" [disabled]="addingToCart">
+                {{ addingToCart ? 'Adding...' : '🛒 Add to Cart' }}
+              </button>
+              <button class="btn-wish" [class.active]="inWishlist" (click)="toggleWishlist()">
+                {{ inWishlist ? '♥' : '♡' }}
+              </button>
+            </div>
+          }
+
+          <div class="meta">
+            <p>SKU: <strong>{{ product.sku }}</strong></p>
+            <p>Views: <strong>{{ product.viewCount }}</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab" [class.active]="activeTab==='desc'" (click)="activeTab='desc'">Description</button>
+        <button class="tab" [class.active]="activeTab==='reviews'" (click)="activeTab='reviews'">Reviews ({{ reviews.length }})</button>
+      </div>
+
+      @if (activeTab === 'desc') {
+        <div class="desc-content"><p>{{ product.description }}</p></div>
+      } @else {
+        <app-reviews [productId]="product.id" [reviews]="reviews" (reviewAdded)="onReviewAdded($event)" />
+      }
+
+      <app-related-products [categoryId]="product.categoryId" [excludeId]="product.id" />
+    } @else {
+      <div class="empty"><p>Product not found.</p></div>
+    }
+  </div>
+</div>

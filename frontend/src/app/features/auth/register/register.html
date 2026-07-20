@@ -1,0 +1,89 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    @if (registered) {
+      <div class="success-state">
+        <div class="success-icon">✅</div>
+        <h2>Account Created!</h2>
+        <p>Your account has been created successfully. Please check your email to verify your account.</p>
+        <a routerLink="/auth/login" class="btn-submit" style="display:block;text-align:center;text-decoration:none;margin-top:20px">Go to Login</a>
+      </div>
+    } @else {
+
+      <div class="auth-header">
+        <div class="logo-icon">🛒</div>
+        <h1>Create Account</h1>
+        <p>Join us today — it's free!</p>
+      </div>
+
+      <!-- Role selector -->
+      <div class="role-tabs">
+        <button type="button" class="role-btn" [class.active]="f['role'].value === 'Customer'" (click)="f['role'].setValue('Customer')">
+          🛍️ Customer
+        </button>
+        <button type="button" class="role-btn" [class.active]="f['role'].value === 'Seller'" (click)="f['role'].setValue('Seller')">
+          🏪 Seller
+        </button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" formControlName="fullName" placeholder="John Smith" [class.error]="f['fullName'].invalid && f['fullName'].touched" />
+            @if (f['fullName'].invalid && f['fullName'].touched) {
+              <span class="err">Full name is required (min 3 characters)</span>
+            }
+          </div>
+
+          <div class="field">
+            <label>Phone Number</label>
+            <input type="tel" formControlName="phoneNumber" placeholder="+1 234 567 8900" [class.error]="f['phoneNumber'].invalid && f['phoneNumber'].touched" />
+            @if (f['phoneNumber'].invalid && f['phoneNumber'].touched) {
+              <span class="err">Phone number is required</span>
+            }
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" placeholder="you@example.com" [class.error]="f['email'].invalid && f['email'].touched" />
+          @if (f['email'].invalid && f['email'].touched) {
+            <span class="err">Please enter a valid email address</span>
+          }
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Password</label>
+            <input type="password" formControlName="password" placeholder="Min. 8 characters" [class.error]="f['password'].invalid && f['password'].touched" />
+            @if (f['password'].invalid && f['password'].touched) {
+              <span class="err">Minimum 8 characters</span>
+            }
+          </div>
+
+          <div class="field">
+            <label>Confirm Password</label>
+            <input type="password" formControlName="confirmPassword" placeholder="Repeat password" [class.error]="form.errors?.['mismatch'] && f['confirmPassword'].touched" />
+            @if (form.errors?.['mismatch'] && f['confirmPassword'].touched) {
+              <span class="err">Passwords do not match</span>
+            }
+          </div>
+        </div>
+
+        @if (errorMessage) {
+          <div class="api-error">⚠️ {{ errorMessage }}</div>
+        }
+
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          @if (loading) { <span class="spinner"></span> Creating account... }
+          @else { Create Account }
+        </button>
+
+      </form>
+
+      <p class="switch-link">Already have an account? <a routerLink="/auth/login">Sign in</a></p>
+    }
+  </div>
+</div>

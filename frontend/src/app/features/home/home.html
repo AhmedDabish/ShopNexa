@@ -1,0 +1,121 @@
+<div class="home-page">
+
+  @if (loading) {
+    <div class="skeleton-hero shimmer"></div>
+    <div class="container">
+      <div class="skeleton-section shimmer" style="margin-top:48px;height:160px;border-radius:20px"></div>
+      <div class="skeleton-grid">
+        @for (_ of [1,2,3,4,5,6,7,8]; track $index) {
+          <div class="skeleton-card shimmer"></div>
+        }
+      </div>
+    </div>
+  } @else {
+
+    <!-- HERO -->
+    <app-hero-slider [banners]="banners" />
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+      <div class="trust-inner">
+        <div class="trust-item">
+          <div class="trust-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h6l2 4v4h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div><strong>Free Shipping</strong><span>Orders over $50</span></div>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <div class="trust-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div><strong>Secure Payment</strong><span>256-bit SSL encrypted</span></div>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <div class="trust-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div><strong>Easy Returns</strong><span>30-day return policy</span></div>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <div class="trust-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.62 5a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.4a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z"/></svg>
+          </div>
+          <div><strong>24/7 Support</strong><span>Always here for you</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="home-section">
+      <div class="container">
+        <app-categories-section [categories]="categories" />
+      </div>
+    </div>
+
+    <!-- FEATURED PRODUCTS -->
+    <div class="home-section alt-bg">
+      <div class="container">
+        <app-featured-products [products]="featuredProducts" />
+      </div>
+    </div>
+
+    <!-- SPLIT PROMO -->
+    <div class="split-promo">
+      <div class="split-left">
+        <div class="split-content">
+          <span class="split-badge">Flash Sale</span>
+          <h2>Up to <span class="promo-num">40%</span> Off<br>Today Only</h2>
+          <p>Don't miss these incredible limited-time deals on top products.</p>
+          <a routerLink="/products" class="split-btn">Shop the Sale</a>
+        </div>
+        <div class="split-deco">
+          <div class="deco-ring r1"></div>
+          <div class="deco-ring r2"></div>
+          <div class="deco-ring r3"></div>
+          <span class="deco-emoji">⚡</span>
+        </div>
+      </div>
+      <div class="split-right">
+        <div class="split-card sc1">
+          <div class="sc-icon">🎧</div>
+          <p>Electronics</p>
+          <strong>From $29</strong>
+        </div>
+        <div class="split-card sc2">
+          <div class="sc-icon">👗</div>
+          <p>Fashion</p>
+          <strong>From $19</strong>
+        </div>
+        <div class="split-card sc3">
+          <div class="sc-icon">🏠</div>
+          <p>Home</p>
+          <strong>From $49</strong>
+        </div>
+        <div class="split-card sc4">
+          <div class="sc-icon">📚</div>
+          <p>Books</p>
+          <strong>From $9</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter-section">
+      <div class="nl-bg-pattern"></div>
+      <div class="nl-content">
+        <div class="nl-badge">✉️ Newsletter</div>
+        <h3>Get Exclusive Deals<br><span>Before Anyone Else</span></h3>
+        <p>Join 50,000+ shoppers who receive our weekly deals digest.</p>
+        <div class="nl-form">
+          <input type="email" placeholder="your@email.com" />
+          <button>Subscribe Free</button>
+        </div>
+        <p class="nl-note">No spam, ever. Unsubscribe anytime.</p>
+      </div>
+    </div>
+
+  }
+</div>

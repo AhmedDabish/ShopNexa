@@ -1,0 +1,51 @@
+<div class="page"><div class="container">
+  <h1 class="title">My Orders</h1>
+
+  <div class="status-tabs">
+    @for (s of statuses; track s.value) {
+      <button class="tab" [class.active]="activeStatus === s.value" (click)="filterBy(s.value)">{{ s.label }}</button>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="skeletons">@for(_ of [1,2,3]; track $index){<div class="skeleton"></div>}</div>
+  } @else if (filtered.length === 0) {
+    <div class="empty"><p>📦 No orders found</p><a routerLink="/products" class="browse-btn">Start Shopping</a></div>
+  } @else {
+    <div class="orders-list">
+      @for (o of filtered; track o.id) {
+        <div class="order-card">
+          <div class="order-header">
+            <div>
+              <p class="order-num">Order #{{ o.orderNumber }}</p>
+              <p class="order-date">{{ o.orderDate | dateFormat:'long' }}</p>
+            </div>
+            <span class="status-badge" [class]="o.status.toLowerCase()">{{ statusLabel(o.status) }}</span>
+          </div>
+
+          <div class="order-items">
+            @for (item of (o.orderItems ?? []).slice(0, 3); track item.id) {
+              <div class="mini-item">
+                <img [src]="item.product?.images?.[0]?.imageUrl ?? 'images/placeholder.png'" [alt]="item.product?.name" />
+                <span>{{ item.product?.name }} × {{ item.quantity }}</span>
+              </div>
+            }
+            @if ((o.orderItems?.length ?? 0) > 3) {
+              <p class="more">+ {{ (o.orderItems?.length ?? 0) - 3 }} more items</p>
+            }
+          </div>
+
+          <div class="order-footer">
+            <p class="total">Total: <strong>{{ o.totalAmount | currencyFormat }}</strong></p>
+            <div class="actions">
+              <a [routerLink]="['/orders', o.id]" class="btn-details">View Details</a>
+              @if (o.status === 'Shipped' || o.status === 'Processing') {
+                <a [routerLink]="['/orders', o.id, 'track']" class="btn-track">Track Order</a>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div></div>

@@ -1,0 +1,15 @@
+<div class="item">
+  <a [routerLink]="['/products', item.productId]"><img [src]="img" [alt]="item.product?.name" /></a>
+  <div class="info">
+    <a [routerLink]="['/products', item.productId]" class="name">{{ item.product?.name }}</a>
+    @if (priceChanged) { <p class="price-warn">⚠️ Price changed since added</p> }
+    <p class="price">{{ currentPrice | currencyFormat }}</p>
+  </div>
+  <div class="qty-ctrl">
+    <button (click)="setQty(item.quantity-1)">−</button>
+    <span>{{ item.quantity }}</span>
+    <button (click)="setQty(item.quantity+1)">+</button>
+  </div>
+  <p class="subtotal">{{ (currentPrice * item.quantity) | currencyFormat }}</p>
+  <button class="remove-btn" (click)="remove()" title="Remove">🗑️️</button>
+</div>

@@ -1,0 +1,19 @@
+.step-wrap { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 24px; }
+.step-wrap h3 { font-size: 17px; font-weight: 700; margin-bottom: 20px; color: #111827; }
+.methods { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.method-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+.method-card.active { border-color: #2563eb; background: #eff6ff; }
+.method-icon { font-size: 24px; flex-shrink: 0; }
+.method-info { flex: 1; }
+.method-info strong { display: block; font-size: 14px; color: #111827; margin-bottom: 2px; }
+.method-info small { font-size: 12px; color: #9ca3af; }
+.card-form { background: #f9fafb; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+.card-form h4 { font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 14px; }
+.field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.field label { font-size: 12px; font-weight: 500; color: #374151; }
+.field input { padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; font-family: inherit; background: #fff; }
+.field input:focus { border-color: #2563eb; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.secure-note { font-size: 12px; color: #059669; margin-top: 8px; }
+.btn-next { width: 100%; padding: 13px; background: #2563eb; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.btn-next:hover { background: #1d4ed8; }

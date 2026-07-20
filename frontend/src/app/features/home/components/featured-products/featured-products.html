@@ -1,0 +1,16 @@
+@if (products.length) {
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-subtitle">Handpicked for quality & value</p>
+      </div>
+      <a routerLink="/products" class="view-all-btn">View All →</a>
+    </div>
+    <div class="grid">
+      @for (p of products.slice(0, 8); track p.id) {
+        <app-product-card [product]="p" />
+      }
+    </div>
+  </section>
+}

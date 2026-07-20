@@ -1,0 +1,19 @@
+<div class="promo-wrap">
+  <h4>Promo Code</h4>
+  @if (!success) {
+    <div class="input-row">
+      <input type="text" [(ngModel)]="code" placeholder="Enter promo code" (keyup.enter)="apply()" [disabled]="loading" />
+      <button class="apply-btn" (click)="apply()" [disabled]="loading || !code.trim()">
+        {{ loading ? '...' : 'Apply' }}
+      </button>
+    </div>
+  } @else {
+    <div class="applied-row">
+      <span class="applied-code">{{ code }}</span>
+      <button class="remove-btn" (click)="remove()">× Remove</button>
+    </div>
+  }
+  @if (message) {
+    <p class="msg" [class.ok]="success">{{ message }}</p>
+  }
+</div>

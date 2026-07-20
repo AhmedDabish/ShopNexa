@@ -1,0 +1,11 @@
+@if (promobanners.length) {
+  <section class="section">
+    <div class="banners-grid">
+      @for (b of promobanners; track b.id) {
+        <a [routerLink]="b.linkUrl ?? '/products'" class="banner-card" [style.background-image]="b.imageUrl ? 'url('+b.imageUrl+')' : ''">
+          <div class="banner-body"><h3>{{ b.title }}</h3>@if(b.description){<p>{{ b.description }}</p>}</div>
+        </a>
+      }
+    </div>
+  </section>
+}

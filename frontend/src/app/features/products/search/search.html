@@ -1,0 +1,10 @@
+<div class="page"><div class="container">
+  <h1 class="title">Search Results for: <span>"{{ query }}"</span></h1>
+  @if (loading) { <p class="state">Searching...</p> }
+  @else if (products.length === 0) { <p class="state">🔍 No results found for "{{ query }}"</p> }
+  @else {
+    <p class="count">{{ totalItems }} result{{ totalItems !== 1 ? 's' : '' }} found</p>
+    <div class="grid">@for(p of products;track p.id){<app-product-card [product]="p"/>}</div>
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [totalItems]="totalItems" (pageChange)="load($event)" />
+  }
+</div></div>

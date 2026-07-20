@@ -1,0 +1,27 @@
+<div class="page"><div class="container">
+  <h1 class="title">My Wishlist</h1>
+  @if ((wishlistSvc.items$ | async)?.length === 0) {
+    <div class="empty">
+      <p>♡ Your wishlist is empty</p>
+      <a routerLink="/products" class="browse-btn">Browse Products</a>
+    </div>
+  } @else {
+    <div class="grid">
+      @for (item of (wishlistSvc.items$ | async) ?? []; track item.id) {
+        <div class="wish-card">
+          <a [routerLink]="['/products', item.productId]">
+            <img [src]="getImg(item)" [alt]="item.product?.name" />
+          </a>
+          <div class="info">
+            <a [routerLink]="['/products', item.productId]" class="name">{{ item.product?.name }}</a>
+            <p class="price">{{ (item.product?.discountPrice ?? item.product?.price) | currencyFormat }}</p>
+            <div class="actions">
+              <button class="btn-cart" (click)="addToCart(item)">🛒 Add to Cart</button>
+              <button class="btn-remove" (click)="remove(item)">🗑️️️</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div></div>

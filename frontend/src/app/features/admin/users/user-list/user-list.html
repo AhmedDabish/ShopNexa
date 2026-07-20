@@ -1,0 +1,30 @@
+<div>
+  <h2 class="page-title">Users</h2>
+  @if (loading) { <p>Loading...</p> }
+  @else {
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (u of users; track u.id) {
+            <tr>
+              <td>{{ u.id }}</td>
+              <td><strong>{{ u.fullName }}</strong></td>
+              <td>{{ u.email }}</td>
+              <td><span class="role-badge" [class]="u.role?.name?.toLowerCase()">{{ u.role?.name }}</span></td>
+              <td><span class="status" [class.active]="u.isActive">{{ u.isActive ? 'Active' : 'Restricted' }}</span></td>
+              <td>{{ u.createdAt | dateFormat:'short' }}</td>
+              <td>
+                <div class="actions">
+                  <a [routerLink]="['/admin/users', u.id]" class="btn-view">View</a>
+                  @if (!u.isActive) { <button class="btn-approve" (click)="approve(u.id)">Activate</button> }
+                  @else { <button class="btn-restrict" (click)="restrict(u.id)">Restrict</button> }
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

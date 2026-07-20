@@ -1,0 +1,20 @@
+<div class="page"><div class="container">
+  <h1 class="title">Shopping Cart</h1>
+  @if (cartSvc.cart$ | async; as cart) {
+    @if (cart.cartItems.length) {
+      <div class="layout">
+        <div class="items-col">
+          @for (item of cart.cartItems; track item.id) {
+            <app-cart-item [item]="item" />
+          }
+        </div>
+        <div class="summary-col"><app-cart-summary [cart]="cart" /></div>
+      </div>
+    } @else {
+      <div class="empty">
+        <p>🛒 Your cart is empty</p>
+        <a routerLink="/products" class="browse-btn">Browse Products</a>
+      </div>
+    }
+  }
+</div></div>

@@ -1,0 +1,28 @@
+<div>
+  <div class="header"><h2 class="page-title">Products</h2><a routerLink="/admin/products/add" class="btn-add">+ Add Product</a></div>
+  @if (loading) { <p>Loading...</p> }
+  @else {
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Name</th><th>Price</th><th>Stock</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (p of products; track p.id) {
+            <tr>
+              <td><strong>{{ p.name }}</strong><br/><small>{{ p.sku }}</small></td>
+              <td>{{ p.price | currencyFormat }}</td>
+              <td><span [class.low]="p.stockQuantity < 10">{{ p.stockQuantity }}</span></td>
+              <td>{{ p.category?.name ?? '—' }}</td>
+              <td><span class="status" [class.active]="p.isActive">{{ p.isActive ? 'Active' : 'Inactive' }}</span></td>
+              <td>
+                <div class="actions">
+                  <a [routerLink]="['/admin/products/edit', p.id]" class="btn-edit">Edit</a>
+                  <button class="btn-del" (click)="delete(p.id)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

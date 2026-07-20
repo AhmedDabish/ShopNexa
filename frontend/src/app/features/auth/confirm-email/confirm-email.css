@@ -1,0 +1,5 @@
+.auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f9fafb;padding:20px}
+.auth-card{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:400px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.auth-header{text-align:center;margin-bottom:28px}.logo{font-size:50px;margin-bottom:14px}
+.auth-header h1{font-size:22px;font-weight:700;margin-bottom:8px}.auth-header p{color:#6b7280;font-size:14px}
+.btn-submit{width:100%;padding:12px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}

@@ -1,0 +1,23 @@
+<div>
+  <h2 class="page-title">Earnings</h2>
+  @if (loading) { <p>Loading…</p> }
+  @else if (earnings) {
+    <div class="earning-cards">
+      <div class="card"><p class="val">{{ earnings.totalEarnings | currencyFormat }}</p><p class="lbl">Total earnings</p></div>
+      <div class="card pending"><p class="val">{{ earnings.pendingPayouts | currencyFormat }}</p><p class="lbl">Pending payments</p></div>
+    </div>
+    <button class="payout-btn" (click)="requestPayout()" [disabled]="requesting">{{ requesting ? 'Ordering…' : '💸 Payout request' }}</button>
+
+    @if (earnings.history?.length) {
+      <h3 class="hist-title">Payment history</h3>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>
+          @for (h of earnings.history; track h.id) {
+            <tr><td>{{ h.date | dateFormat:'short' }}</td><td>{{ h.amount | currencyFormat }}</td><td>{{ h.status }}</td></tr>
+          }
+        </tbody>
+      </table></div>
+    }
+  }
+</div>

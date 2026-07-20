@@ -1,0 +1,53 @@
+<div class="reviews-wrap">
+  <div class="review-summary">
+    <div class="avg-block">
+      <span class="avg-num">{{ avgRating | number:'1.1-1' }}</span>
+      <div class="stars-big">@for(s of [1,2,3,4,5];track s){<span [class.f]="s<=avgRating">★</span>}</div>
+      <small>{{ reviews.length }} review{{ reviews.length !== 1 ? 's' : '' }}</small>
+    </div>
+    <div class="dist">
+      @for (d of ratingDist; track d.stars) {
+        <div class="dist-row">
+          <span>{{ d.stars }}★</span>
+          <div class="bar"><div class="fill" [style.width.%]="d.pct"></div></div>
+          <span>{{ d.count }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (auth.isLoggedIn) {
+    <form [formGroup]="form" (ngSubmit)="submit()" class="review-form">
+      <h4>Write a Review</h4>
+      <div class="star-picker">
+        @for (s of [1,2,3,4,5]; track s) {
+          <button type="button" class="star-btn" [class.lit]="s <= (hoverRating || form.value.rating!)"
+            (mouseover)="hoverRating=s" (mouseleave)="hoverRating=0" (click)="setRating(s)">★</button>
+        }
+      </div>
+      <textarea formControlName="comment" rows="3" placeholder="Share your experience with this product..." class="comment-input"></textarea>
+      <button type="submit" class="submit-btn" [disabled]="loading">
+        {{ loading ? 'Submitting...' : 'Submit Review' }}
+      </button>
+    </form>
+  }
+
+  <div class="review-list">
+    @for (r of reviews; track r.id) {
+      <div class="review-card">
+        <div class="rev-header">
+          <div class="avatar">{{ r.user?.fullName?.charAt(0)?.toUpperCase() }}</div>
+          <div>
+            <p class="rev-name">{{ r.user?.fullName ?? 'Anonymous' }}</p>
+            <p class="rev-date">{{ r.createdAt | dateFormat:'relative' }}</p>
+          </div>
+          @if (r.isVerifiedPurchase) { <span class="verified">✅ Verified Purchase</span> }
+        </div>
+        <div class="stars">@for(s of [1,2,3,4,5];track s){<span [class.f]="s<=r.rating">★</span>}</div>
+        @if (r.comment) { <p class="comment">{{ r.comment }}</p> }
+      </div>
+    } @empty {
+      <p class="no-reviews">No reviews yet. Be the first to review this product!</p>
+    }
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(248,250,252,0.7);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 150ms ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.spinner-wrap {
+  background: var(--c-white);
+  border-radius: var(--r-xl);
+  padding: 28px 36px;
+  box-shadow: var(--sh-xl);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 14px;
+  border: 1px solid var(--c-border);
+}
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--c-border);
+  border-top-color: var(--c-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner-text { font-size: 13px; font-weight: 600; color: var(--c-ink-3); }

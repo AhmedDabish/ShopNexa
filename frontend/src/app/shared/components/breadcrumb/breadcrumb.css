@@ -1,0 +1,5 @@
+.breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 14px; color: #6b7280; margin-bottom: 20px; flex-wrap: wrap; }
+.crumb-link { color: #2563eb; text-decoration: none; }
+.crumb-link:hover { text-decoration: underline; }
+.crumb-current { color: #374151; font-weight: 500; }
+.sep { color: #d1d5db; }

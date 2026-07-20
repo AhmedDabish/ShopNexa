@@ -1,0 +1,16 @@
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.page-title{font-size:20px;font-weight:700;color:#111827}
+.btn-back{font-size:13px;color:#2563eb;text-decoration:none}
+.form-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field.full{margin-bottom:14px}
+.field label{font-size:13px;font-weight:500;color:#374151}
+.field input,.field select,.field textarea{padding:10px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;outline:none;font-family:inherit}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#2563eb}
+.field textarea{resize:vertical}
+.checkbox-label{display:flex;align-items:center;gap:8px;font-size:13px;color:#374151;margin-bottom:20px;cursor:pointer}
+.form-actions{display:flex;gap:10px}
+.btn-cancel{padding:10px 20px;border:1px solid #d1d5db;border-radius:8px;text-decoration:none;font-size:13px;color:#374151}
+.btn-save{padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-save:disabled{background:#93c5fd;cursor:not-allowed}

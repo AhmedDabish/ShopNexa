@@ -1,0 +1,12 @@
+<div class="summary">
+  <h3>Order Summary</h3>
+  <div class="row"><span>Items ({{ itemCount }})</span><strong>{{ subtotal | currencyFormat }}</strong></div>
+  <div class="row"><span>Shipping</span><strong>{{ shipping === 0 ? 'FREE' : (shipping | currencyFormat) }}</strong></div>
+  @if (shipping > 0) {
+    <p class="free-note">Add {{ (500 - subtotal) | currencyFormat }} more for free shipping</p>
+  }
+  <div class="divider"></div>
+  <div class="row total"><span>Total</span><strong>{{ total | currencyFormat }}</strong></div>
+  <a routerLink="/checkout" class="checkout-btn">Proceed to Checkout</a>
+  <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
+</div>

@@ -1,0 +1,14 @@
+.page-title{font-size:20px;font-weight:700;color:#111827;margin-bottom:20px}
+.earning-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px;text-align:center}
+.card.pending{border-color:#f59e0b}
+.val{font-size:28px;font-weight:700;color:#111827;margin-bottom:6px}
+.lbl{font-size:13px;color:#6b7280}
+.payout-btn{padding:12px 28px;background:#059669;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-bottom:28px}
+.payout-btn:disabled{background:#9ca3af;cursor:not-allowed}
+.hist-title{font-size:15px;font-weight:600;color:#374151;margin-bottom:12px}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid #e5e7eb;background:#fff}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{padding:10px 14px;background:#f9fafb;font-weight:600;color:#374151;text-align:right;border-bottom:1px solid #e5e7eb}
+.table td{padding:10px 14px;color:#4b5563;border-bottom:1px solid #f3f4f6}
+.table tr:last-child td{border-bottom:none}

@@ -1,0 +1,12 @@
+.page-title{font-size:20px;font-weight:700;color:#111827;margin-bottom:20px}
+.empty{color:#9ca3af;padding:40px 0;text-align:center}
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid #e5e7eb;background:#fff}
+.table{width:100%;border-collapse:collapse;font-size:13px}
+.table th{padding:12px 14px;background:#f9fafb;font-weight:600;color:#374151;text-align:right;border-bottom:1px solid #e5e7eb}
+.table td{padding:12px 14px;color:#4b5563;border-bottom:1px solid #f3f4f6}
+.table tr:last-child td{border-bottom:none}
+.status{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.status.pending{background:#fef3c7;color:#92400e}
+.status.processing{background:#dbeafe;color:#1e40af}
+.status.shipped{background:#e0e7ff;color:#3730a3}
+.status.delivered{background:#d1fae5;color:#065f46}

@@ -1,0 +1,71 @@
+<!-- Profile picture upload card -->
+<div class="avatar-card">
+  <div class="avatar-wrap">
+    <div class="avatar-circle" [class.uploading]="uploading">
+      @if (profileImageUrl) {
+        <img [src]="profileImageUrl" alt="Profile picture" />
+      } @else {
+        <span class="avatar-initial">{{ userInitial }}</span>
+      }
+      @if (uploading) {
+        <div class="upload-overlay">
+          <div class="spinner"></div>
+        </div>
+      }
+    </div>
+    <button type="button" class="camera-btn" (click)="openFilePicker()" [disabled]="uploading" title="Change picture">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="avatar-info">
+    <h3>{{ auth.currentUser?.fullName }}</h3>
+    <p>{{ auth.currentUser?.email }}</p>
+    <div class="avatar-actions">
+      <button type="button" class="btn-upload" (click)="openFilePicker()" [disabled]="uploading">
+        {{ uploading ? 'Uploading...' : 'Change picture' }}
+      </button>
+      @if (auth.currentUser?.profileImage) {
+        <button type="button" class="btn-remove" (click)="removeImage()" [disabled]="uploading">
+          Remove
+        </button>
+      }
+    </div>
+    <p class="hint">JPG, PNG, WEBP or GIF — max 5 MB</p>
+  </div>
+
+  <!-- Hidden file input — triggered by the buttons above -->
+  <input #fileInput type="file" accept="image/jpeg,image/png,image/webp,image/gif"
+         (change)="onFileSelected($event)" hidden />
+</div>
+
+<!-- Below: keep your existing personal info form (name, phone, etc.) -->
+ <div>
+  <h2 class="section-title">Personal Information</h2>
+  @if (loading) { <p>Loading...</p> }
+  @else {
+    @if (user?.profileImage) { <img [src]="user!.profileImage" class="avatar-img" alt="Profile photo" /> }
+    @else { <div class="avatar-placeholder">{{ user?.fullName?.charAt(0)?.toUpperCase() }}</div> }
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+      <div class="field">
+        <label>Email Address</label>
+        <input [value]="user?.email" disabled class="disabled-input" />
+      </div>
+      <div class="field">
+        <label>Full Name</label>
+        <input formControlName="fullName" placeholder="Your full name" />
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input formControlName="phoneNumber" placeholder="+1 234 567 8900" />
+      </div>
+      <button type="submit" class="save-btn" [disabled]="saving">
+        {{ saving ? 'Saving...' : 'Save Changes' }}
+      </button>
+    </form>
+  }
+</div>

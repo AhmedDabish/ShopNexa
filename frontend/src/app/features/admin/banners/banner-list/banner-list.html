@@ -1,0 +1,50 @@
+<div>
+  <div class="header">
+    <h2 class="page-title">Banners</h2>
+    <button class="btn-add" (click)="openCreate()">+ Add banner</button>
+  </div>
+
+  @if (showForm) {
+    <div class="form-card">
+      <h3>{{ editingId == null ? 'New banner' : 'Edit banner' }}</h3>
+      <div class="grid-2">
+        <div class="field"><label>Title</label><input [(ngModel)]="f.title" placeholder="Summer offer" /></div>
+        <div class="field"><label>Image URL</label><input [(ngModel)]="f.imageUrl" placeholder="https://..." /></div>
+        <div class="field"><label>Target link</label><input [(ngModel)]="f.linkUrl" placeholder="/products" /></div>
+        <div class="field"><label>Order</label><input type="number" [(ngModel)]="f.displayOrder" /></div>
+        <div class="field"><label>Start date</label><input type="date" [(ngModel)]="f.startDate" /></div>
+        <div class="field"><label>Expiry date</label><input type="date" [(ngModel)]="f.endDate" /></div>
+      </div>
+      <div class="field full"><label>Description</label><input [(ngModel)]="f.description" /></div>
+      <label class="checkbox-label"><input type="checkbox" [(ngModel)]="f.isActive" /> Publish banner</label>
+      <div class="form-actions">
+        <button class="btn-cancel" (click)="cancel()">Cancel</button>
+        <button class="btn-save" (click)="save()" [disabled]="saving">{{ saving ? 'Saving…' : (editingId == null ? 'Save' : 'Update') }}</button>
+      </div>
+    </div>
+  }
+
+  @if (loading) { <p>Loading…</p> }
+  @else if (!banners.length) {
+    <p class="empty">No banners yet.</p>
+  }
+  @else {
+    <div class="banners-grid">
+      @for (b of banners; track b.id) {
+        <div class="banner-card">
+          @if (b.imageUrl) { <img [src]="b.imageUrl" [alt]="b.title" /> }
+          @else { <div class="img-placeholder">🖼️</div> }
+          <div class="info">
+            <p class="title">{{ b.title }}</p>
+            <p class="desc">{{ b.description }}</p>
+            <div class="card-actions">
+              <span [class]="b.isActive ? 'ok' : 'off'">{{ b.isActive ? 'Active' : 'Disabled' }}</span>
+              <button class="btn-edit" (click)="openEdit(b)">Edit</button>
+              <button class="btn-del" (click)="delete(b.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

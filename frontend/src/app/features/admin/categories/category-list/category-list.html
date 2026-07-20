@@ -1,0 +1,34 @@
+<div>
+  <div class="header"><h2 class="page-title">Categories</h2><button class="btn-add" (click)="openAdd()">+ Add category</button></div>
+  @if (showForm) {
+    <div class="form-card">
+      <h3>{{ editItem ? 'Edit category' : 'New category' }}</h3>
+      <div class="field"><label>Category name</label><input [(ngModel)]="formName" placeholder="Example: Electronics" /></div>
+      <div class="field"><label>Description</label><input [(ngModel)]="formDesc" placeholder="Short description" /></div>
+      <div class="form-actions">
+        <button class="btn-cancel" (click)="showForm=false">Cancel</button>
+        <button class="btn-save" (click)="save()" [disabled]="saving">{{ saving ? 'Saving…' : 'Save' }}</button>
+      </div>
+    </div>
+  }
+  @if (loading) { <p>Loading…</p> }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>#</th><th>Name</th><th>Description</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        @for (c of categories; track c.id) {
+          <tr>
+            <td>{{ c.id }}</td>
+            <td><strong>{{ c.name }}</strong></td>
+            <td>{{ c.description }}</td>
+            <td><span [class]="c.isActive ? 'ok' : 'off'">{{ c.isActive ? 'Active' : 'Disabled' }}</span></td>
+            <td><div class="actions">
+              <button class="btn-edit" (click)="openEdit(c)">Edit</button>
+              <button class="btn-del" (click)="delete(c.id)">Delete</button>
+            </div></td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div>

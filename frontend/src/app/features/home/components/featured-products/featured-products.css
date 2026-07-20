@@ -1,0 +1,8 @@
+.section { padding: 0; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+.section-title { font-size: 30px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; }
+.section-subtitle { font-size: 14px; color: #94a3b8; margin-top: 4px; font-weight: 400; }
+.view-all-btn { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #2563eb; text-decoration: none; font-weight: 600; padding: 9px 18px; border: 1.5px solid #dbeafe; border-radius: 50px; transition: all 0.2s; background: #eff6ff; }
+.view-all-btn:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+@media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }

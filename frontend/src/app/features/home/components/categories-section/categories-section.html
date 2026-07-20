@@ -1,0 +1,23 @@
+@if (categories.length) {
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Browse Categories</h2>
+        <p class="section-subtitle">Find exactly what you're looking for</p>
+      </div>
+      <a routerLink="/products" class="view-all-btn">View All →</a>
+    </div>
+    <div class="grid">
+      @for (cat of categories.slice(0, 8); track cat.id) {
+        <a #catCard [routerLink]="['/products']" [queryParams]="{categoryId: cat.id}" class="cat-card">
+          @if (cat.imageUrl) {
+            <div class="cat-img-wrap"><img [src]="cat.imageUrl" [alt]="cat.name" /></div>
+          } @else {
+            <div class="cat-icon-box">{{ getCatIcon(cat.name) }}</div>
+          }
+          <span class="cat-name">{{ cat.name }}</span>
+        </a>
+      }
+    </div>
+  </section>
+}

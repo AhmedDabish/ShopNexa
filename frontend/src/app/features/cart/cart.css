@@ -1,0 +1,9 @@
+.page{padding-top:80px;min-height:100vh}
+.container{max-width:1280px;margin:0 auto;padding:24px 20px}
+.title{font-size:22px;font-weight:700;margin-bottom:24px;color:#111827}
+.layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.items-col{display:flex;flex-direction:column;gap:14px}
+.empty{text-align:center;padding:80px;color:#6b7280}
+.empty p{font-size:20px;margin-bottom:20px}
+.browse-btn{padding:12px 32px;background:#2563eb;color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px}
+@media(max-width:768px){.layout{grid-template-columns:1fr}}

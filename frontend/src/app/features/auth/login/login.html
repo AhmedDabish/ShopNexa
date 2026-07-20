@@ -1,0 +1,85 @@
+<div class="auth-page">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <div class="logo-icon">🛒</div>
+      <h1>Welcome Back</h1>
+      <p>Sign in to your account to continue</p>
+    </div>
+
+  <!-- Google Sign-In — rendered by Google's official GIS script -->
+<div class="google-signin-wrapper">
+  <div #googleBtn></div>
+</div>
+
+    <div class="divider">or</div>
+
+    <!-- نموذج تسجيل الدخول العادي -->
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          [class.error]="f['email'].invalid && f['email'].touched"
+          autocomplete="email"
+        />
+        @if (f['email'].invalid && f['email'].touched) {
+          <span class="err">
+            {{ f['email'].errors?.['required'] ? 'Email is required' : 'Please enter a valid email address' }}
+          </span>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <div class="label-row">
+          <label for="password">Password</label>
+          <a routerLink="/auth/forgot-password" class="forgot-link">Forgot password?</a>
+        </div>
+        <div class="input-wrap">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.error]="f['password'].invalid && f['password'].touched"
+            autocomplete="current-password"
+          />
+          <button type="button" class="eye-btn" (click)="showPassword = !showPassword" tabindex="-1">
+            {{ showPassword ? '🙈' : '👁' }}
+          </button>
+        </div>
+        @if (f['password'].invalid && f['password'].touched) {
+          <span class="err">Password is required (minimum 6 characters)</span>
+        }
+      </div>
+
+      <!-- API Error -->
+      @if (errorMessage) {
+        <div class="api-error">
+          <span>⚠️</span> {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Submit -->
+      <button type="submit" class="btn-submit" [disabled]="loading">
+        @if (loading) {
+          <span class="spinner"></span> Signing in...
+        } @else {
+          Sign In
+        }
+      </button>
+
+    </form>
+
+    <p class="switch-link">
+      Don't have an account? <a routerLink="/auth/register">Create one</a>
+    </p>
+
+  </div>
+</div>

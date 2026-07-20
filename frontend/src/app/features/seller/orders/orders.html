@@ -1,0 +1,20 @@
+<div>
+  <h2 class="page-title">My orders</h2>
+  @if (loading) { <p>Loading…</p> }
+  @else if (orders.length === 0) { <p class="empty">No orders yet</p> }
+  @else {
+    <div class="table-wrap"><table class="table">
+      <thead><tr><th>Order number</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+      <tbody>
+        @for (o of orders; track o.id) {
+          <tr>
+            <td><strong>#{{ o.orderNumber }}</strong></td>
+            <td>{{ o.orderDate | dateFormat:'short' }}</td>
+            <td>{{ o.totalAmount | currencyFormat }}</td>
+            <td><span class="status" [class]="o.status?.toLowerCase()">{{ o.status }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table></div>
+  }
+</div>

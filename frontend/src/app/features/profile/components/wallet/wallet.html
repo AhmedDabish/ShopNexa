@@ -1,0 +1,29 @@
+<div>
+  <h2 class="section-title">My Wallet</h2>
+  @if (loading) { <p>Loading...</p> }
+  @else {
+    <div class="balance-card">
+      <p class="balance-label">Current Balance</p>
+      <p class="balance-amount">{{ balance | currencyFormat }}</p>
+    </div>
+
+    <h3 class="tx-title">Transaction History</h3>
+    @if (transactions.length === 0) {
+      <p class="empty">No transactions yet.</p>
+    } @else {
+      <div class="tx-list">
+        @for (tx of transactions; track tx.id) {
+          <div class="tx-row">
+            <div>
+              <p class="tx-desc">{{ tx.description }}</p>
+              <p class="tx-date">{{ tx.createdAt | dateFormat:'relative' }}</p>
+            </div>
+            <p class="tx-amount" [class.credit]="tx.amount > 0">
+              {{ tx.amount > 0 ? '+' : '' }}{{ tx.amount | currencyFormat }}
+            </p>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Cairo', 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+  direction: rtl;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img { max-width: 100%; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+// Status colors
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.pending  { background: #fff3cd; color: #856404; }
+  &.processing { background: #cfe2ff; color: #084298; }
+  &.shipped  { background: #d1ecf1; color: #0c5460; }
+  &.delivered{ background: #d4edda; color: #155724; }
+  &.cancelled{ background: #f8d7da; color: #721c24; }
+}

@@ -1,0 +1,12 @@
+.promo-wrap { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+.promo-wrap h4 { font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 12px; }
+.input-row { display: flex; gap: 8px; }
+.input-row input { flex: 1; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; font-family: inherit; }
+.input-row input:focus { border-color: #2563eb; }
+.apply-btn { padding: 10px 18px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.apply-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+.applied-row { display: flex; align-items: center; justify-content: space-between; background: #d1fae5; border-radius: 8px; padding: 10px 14px; }
+.applied-code { font-size: 14px; font-weight: 600; color: #065f46; letter-spacing: .06em; }
+.remove-btn { background: none; border: none; font-size: 13px; color: #dc2626; cursor: pointer; font-family: inherit; }
+.msg { font-size: 13px; margin-top: 8px; color: #ef4444; }
+.msg.ok { color: #059669; }
