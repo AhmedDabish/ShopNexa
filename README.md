@@ -5,7 +5,6 @@
 <img width="1900" height="842" alt="image" src="https://github.com/user-attachments/assets/d2b381db-7107-4421-a639-42b110579977" />
 <img width="1919" height="522" alt="image" src="https://github.com/user-attachments/assets/6765eb12-1aa9-490c-957f-37cdb7d2007e" />
 
-
 A full-stack e-commerce web application featuring separate experiences for **Customers**, **Sellers**, and **Admins** — built with an Angular frontend and an ASP.NET Core Web API backend.
 
 **Live Demo:** https://ecommerce129angular.runasp.net/
